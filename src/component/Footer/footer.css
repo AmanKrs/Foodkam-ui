@@ -1,0 +1,66 @@
+.footerdiv {
+  height: auto;
+  background-color: black;
+  color: #fff;
+  padding-bottom: 20px;
+  width: 100%;
+  bottom: 0px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+}
+.menu-items {
+  margin-top: 30px;
+}
+.footmenu{
+  color: #928f8f;
+}
+.apkstore {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.hzline {
+  margin-top: 50px;
+  width: 90%;
+  height: 1.5px;
+  background-color: #777474;
+  border: none;
+}
+.ftrdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 60px;
+}
+.footerlogo {
+  width: 100px;
+  height: 80px;
+}
+.ftricondiv {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+ 
+}
+.ftr-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.ftr-icon * {
+  cursor: pointer;
+}
+.ftr-copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  line-height: 40px;
+}

@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
+/* item's carousel css */
+
+.carousel-head {
+  padding-left: 40px;
+  padding-bottom: 20px;
+}
+.carousel-container {
+  width: 95%;
+  box-sizing: border-box;
+  margin-top: 0px;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.carousel-list {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  overflow: hidden;
+  gap: 20px;
 }
-
-.App-link {
-  color: #61dafb;
+.carousel-btn-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.carousel-box {
+  width: 200px;
+  height: auto;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+.carousel-list-offer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  gap: 220px;
+}
+.offerImg {
+  width: 400px;
+}
+.carousel-btn{
+width: 30px;
+height: 30px;
+border-radius: 50%;
+}
+.carouselImg{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }

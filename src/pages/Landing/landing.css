@@ -1,0 +1,99 @@
+.banner {
+  height: 400px;
+  background-image: radial-gradient(
+      circle,
+      rgba(153, 153, 153, 0) 10%,
+      rgba(0, 0, 0, 0.07886904761904767) 19%,
+      rgba(0, 0, 0, 0.7175245098039216) 85%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    url("https://t3.ftcdn.net/jpg/02/57/29/88/360_F_257298837_B8n4pIKuxTVd2O9FyZAr44b4jU5FGnCH.jpg");
+  background-size: cover;
+}
+
+.banner-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+}
+.app-title {
+  padding: 25px;
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.title-name {
+  margin: 0px;
+  padding: 0px;
+}
+.title-details {
+  margin: 0px;
+  padding: 0px;
+}
+.searchfood-container {
+  display: flex;
+  align-items: center;
+}
+.bannerlocation {
+  width: 200px;
+  height: 42px;
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+  font-size: 20px;
+}
+.searchfood {
+  width: 400px;
+  height: 40px;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+  font-size: 20px;
+}
+
+.about {
+  height: 350px;
+  background-color: #302219;
+  display: flex;
+  justify-content: space-around;
+}
+.aboutblock{
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffff;
+  text-align: center;
+}
+
+.about1img{
+  height: 60%;
+  padding-top: 20px;
+}
+.about2img{
+  height: 60%;
+  width: 280px;
+  padding-top: 20px;
+}
+.about3img{
+  height: 50%;
+  width: 200px;
+  padding-top: 40px;
+  padding-bottom: 15px;
+}
+
+.abouthead{
+  margin: 0px;
+  padding: 0px;
+  margin-top: 20px;
+}
+.aboutdetail{
+  margin: 0px;
+  padding: 0px;
+  width: 300px;
+}

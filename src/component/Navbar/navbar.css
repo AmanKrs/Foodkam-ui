@@ -1,0 +1,70 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navlogo {
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 100px;
+  height: 80px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #fff;
+  padding-right: 50px;
+  gap: 20px;
+}
+.navlist {
+  list-style: none;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.loggedheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px 2px 3px 1px grey;
+  padding: 5px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  color: black;
+  height: 55px;
+}
+.navbarlogo {
+  margin-left: 50px;
+  width: 65px;
+  height: 45px;
+}
+
+.loggednavbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lnavbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 50px;
+  gap: 50px;
+}
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.currentlocationdiv {
+}

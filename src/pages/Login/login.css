@@ -1,0 +1,103 @@
+.authdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 60px;
+}
+.authcontainer {
+  width: 50%;
+  height: 550px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.loginbox {
+  width: 60%;
+  height: 480px;
+  border-radius: 5px;
+  margin: 0px auto;
+  background-color: rgb(88, 99, 96);
+}
+
+.authbtn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 60px;
+  color: #ffff;
+  font-size: 18px;
+  font-weight: 400;
+}
+.authbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  cursor: pointer;
+}
+.authbtntrue {
+  background-color: #eba148;
+}
+
+.divider {
+  width: 10px;
+  background-color: aqua;
+  height: 60px;
+}
+.logindiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  gap: 10px;
+}
+.logindivider {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin-top: 40px;
+}
+.logindivider span {
+  background-color: aliceblue;
+  padding: 0px 10px;
+}
+
+.loginid {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+}
+
+.otpvalue{
+  width: 60%;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+}
+.otplabel{
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+}
+
+.loginidbtn {
+  margin-top: 10px;
+  width: 75%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  color: #ffff;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #eba148;
+  cursor: pointer;
+}
