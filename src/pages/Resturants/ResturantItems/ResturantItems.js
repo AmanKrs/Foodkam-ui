@@ -78,6 +78,44 @@ export default function ResturantItems() {
                 </div>
               </div>
             </AccordionDetails>
+            <AccordionDetails>
+              <div className="resInfo">
+                <div className="itemsInfo">
+                  <p className="itemtype"> non-veg</p>
+                  <p className="itemname">Chilly Fish</p> <span>295</span>
+                  <p className="itemdetails">
+                    Serves 1 | Battered fish simmered in soy sauce with
+                    chillies, capcicum and onion. 8 pc. Basa/ bombay vetki
+                    depending on availability.
+                  </p>
+                </div>
+                <div className="itemimgBox">
+                  <img src={item1} className="itemImg" />
+                  <div className="addtocart">
+                    {addItem === 0 ? (
+                      <p
+                        style={{ margin: "0px", padding: "0px 25%" }}
+                        onClick={() => {
+                          setaddItem(1);
+                        }}
+                      >
+                        ADD
+                      </p>
+                    ) : (
+                      <>
+                        <button className="countbtn" onClick={handledelitem}>
+                          -
+                        </button>
+                        {addItem}
+                        <button className="countbtn" onClick={handleadditem}>
+                          +
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </AccordionDetails>
           </Accordion>
           <Accordion disabled>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>

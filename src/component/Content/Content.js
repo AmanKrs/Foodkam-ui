@@ -3,10 +3,13 @@ import Footer from "../Footer/Footer";
 import { Route, Routes } from "react-router-dom";
 import ProtectedLayout from "../ProtectedLayout/ProtectedLayout";
 import Home from "../../pages/Home/Home";
-import AddResturant from "../../pages/Resturants/AddResturant/AddResturant";
+import AddResturant from "../../pages/Resturants/RegisterResturant/AddResturant";
 import ProtectedLayoutRes from "../ProtectedLayout/ProtectedLayoutRes";
-import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails";
 import ResturantItems from "../../pages/Resturants/ResturantItems/ResturantItems";
+import RestaurantProfile from "../../pages/Resturants/RestaurantProfile/RestaurantProfile";
+import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails"
+import AddMenu from "../../pages/Resturants/RestaurantMenu/AddMenu";
+import MenuList from "../../pages/Resturants/RestaurantMenu/MenuList";
 export default function Content() {
   return (
     <div>
@@ -16,11 +19,15 @@ export default function Content() {
           <Route path="/resturants/:id" element={<ResturantItems />}></Route>
         </Route>
         <Route path="/partner" element={<ProtectedLayoutRes />}>
-          <Route path="/partner-with-us" element={<AddResturant />}></Route>
+          <Route path="/partner" element={<AddResturant />}></Route>
           <Route
-            path="/partner/your-resturant"
-            element={<EditResturantDetails />}
-          ></Route>
+            path="/partner/profile"
+            element={<RestaurantProfile />}
+          >
+            <Route path="/partner/profile" element={<AddMenu />}></Route>
+            <Route path="/partner/profile/menulist" element={<MenuList />}></Route>
+            <Route path="/partner/profile/edit-menu" element={<EditResturantDetails />}></Route>
+          </Route>
         </Route>
       </Routes>
       <Footer />

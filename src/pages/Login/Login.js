@@ -11,6 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleCustLogin = async () => {
+    console.log(loginFormData)
     try{
       const result = await axios.post(
         "http://localhost:8087/user/login",
@@ -41,7 +42,7 @@ export default function Login() {
 
   const handleResLogin = () => {
     localStorage.setItem("restoken", "restoken");
-    navigate("/partner/your-resturant");
+    navigate("/partner/profile");
     window.location.reload();
   };
   const handleCustButton = () => {

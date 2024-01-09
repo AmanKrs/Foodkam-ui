@@ -29,12 +29,13 @@
   height: auto;
   margin-top: 10px;
   flex-shrink: 0;
+
 }
 .carousel-list-offer {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden;
+  overflow:hidden;
   gap: 220px;
 }
 .offerImg {
