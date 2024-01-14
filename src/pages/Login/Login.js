@@ -40,10 +40,21 @@ export default function Login() {
     // }
   };
 
-  const handleResLogin = () => {
-    localStorage.setItem("restoken", "restoken");
-    navigate("/partner/profile");
-    window.location.reload();
+  const handleResLogin = async() => {
+    try{
+      const result = await axios.post(
+        "http://localhost:8087/partner/login",
+        loginFormData
+      );
+      if(result.status ===200){
+        localStorage.setItem("restoken", result.data.token);
+        navigate("/partner/profile");
+        // window.location.reload();
+      }
+    }catch(e){
+      console.log(e)
+    }
+   
   };
   const handleCustButton = () => {
     setCustLogin(true);
@@ -93,7 +104,7 @@ export default function Login() {
               type="tel"
               className="loginid"
               placeholder="Phone Number"
-              name="mobileNo"
+              name="phone"
               onChange={handleLoginForm}
             />
             {verifyOtp && (

@@ -21,7 +21,7 @@ export default function Register() {
       console.log(userRegFormData);
       console.log(res.status)
       if(res.status===200){
-        localStorage.setItem("token", "token");
+        localStorage.setItem("token", res.data.token);
         navigate("/");
         window.location.reload();
       }
@@ -68,7 +68,7 @@ console.log(e)
               type="tel"
               className="loginid"
               placeholder="Phone Number"
-              name="mobileNo"
+              name="phone"
               onChange={handleRegForm}
             />
             <input

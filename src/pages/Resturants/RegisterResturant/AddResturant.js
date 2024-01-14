@@ -11,7 +11,7 @@ import RestaurantTime from "./RestaurantTime";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -34,8 +34,12 @@ export default function AddResturant() {
     setActiveStep(0);
   };
 
-  const handleFinish = () => {
-    console.log(resData)
+  const handleFinish =  async() => {
+    const result = await axios.post(
+      "http://localhost:8087/partner/register",
+      resData
+    );
+    console.log(resData);
     navigate("/login");
   };
 
@@ -47,6 +51,10 @@ export default function AddResturant() {
   return (
     <>
       <h1 style={{ color: "#6e39cb", marginLeft: "80px" }}>Partner With Us</h1>
+      <hr style={{ color: "#6e39cb", marginLeft: "80px", marginTop: "-20px" , width:"30%"}}></hr>
+      <p style={{ color: "#6e39cb", marginLeft: "85px", marginTop: "0px" }}>
+        Register your Restaurant
+      </p>
       <div className="details-container">
         <Box sx={{ width: "100%", margin: "auto" }}>
           <Stepper activeStep={activeStep} className="Stepperlabelcolor">
@@ -61,8 +69,12 @@ export default function AddResturant() {
               );
             })}
           </Stepper>
-          {activeStep === 0 && <RestaurantInfo setResData={setResData} resData={resData}/>}
-          {activeStep === 1 && <RestaurantTime setResData={setResData} resData={resData}/>}
+          {activeStep === 0 && (
+            <RestaurantInfo setResData={setResData} resData={resData} />
+          )}
+          {activeStep === 1 && (
+            <RestaurantTime setResData={setResData} resData={resData} />
+          )}
 
           {activeStep === steps.length ? (
             <Fragment>

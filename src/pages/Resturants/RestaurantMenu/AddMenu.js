@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import "../../../utils/resInterceptor";
 
 export default function AddMenu() {
   const [menuData, setMenuData] = useState();
@@ -12,6 +14,7 @@ export default function AddMenu() {
     }));
   };
   const handleItemPicdata = (e) => {
+    console.log(e.target.files[0].type);
     if (
       e.target.files[0].type === "image/jpeg" ||
       e.target.files[0].type === "image/png"
@@ -38,7 +41,6 @@ export default function AddMenu() {
     if (e.target.files[0].size > 10485760) {
       setMediaSize(true);
     }
-
   };
   const handlePicUpload = (e) => {
     console.log(itemPicUrl);
@@ -48,8 +50,12 @@ export default function AddMenu() {
     }));
   };
 
-  const handleAddItem = () => {
-    console.log(menuData);
+  const handleAddItem = async () => {
+    const menuItemData = await axios.post(
+      "http://localhost:8087/restaurant/addmenu",
+      menuData
+    );
+    console.log(menuItemData);
   };
   return (
     <div>
@@ -66,20 +72,13 @@ export default function AddMenu() {
         </div>
         <div>
           <label className="p-form-label">Quantity</label>
-          <select
+          <input
             className="p-select-text"
             name="quantity"
             onChange={handleMenuFormdata}
           >
-            <option></option>
-            <option>Electronics</option>
-            <option>Home Appliances </option>
-            <option>Men's clothing</option>
-            <option>Women's clothing</option>
-            <option>Kids Wear</option>
-            <option>Jewelery</option>
-            <option>Mobiles</option>
-          </select>
+            
+          </input>
         </div>
       </div>
       <div className="p-form-inputs">
@@ -111,15 +110,30 @@ export default function AddMenu() {
         </div>
       </div>
       <div className="p-form-inputs">
-      <div>
-          <label className="p-form-label">cuisine type</label>
+        <div>
+          <label className="p-form-label">Item type</label>
+          <select
+            className="p-select-text"
+            name="itemtype"
+            onChange={handleMenuFormdata}
+          >
+            <option></option>
+            <option>Veg</option>
+            <option>Non-veg</option>
+            <option>Eggiterian</option>
+          </select>
+        </div>
+        <div>
+          <label className="p-form-label">Item Price</label>
           <input
             className="p-input-text"
             type="text"
-            name="itemcuisine"
+            name="itemprice"
             onChange={handleMenuFormdata}
           ></input>
         </div>
+      </div>
+      <div>
         <div>
           <label className="p-form-label">Item Picture</label>
           <input

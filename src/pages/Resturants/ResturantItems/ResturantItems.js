@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./resItems.css";
 import Navbar from "../../../component/Navbar/Navbar";
 import Accordion from "@mui/material/Accordion";
@@ -8,26 +8,44 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import item1 from "../../../assets/northIN.avif";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import "../../../utils/interceptor";
 
 export default function ResturantItems() {
   let { id } = useParams();
-  console.log("idparam", id);
+  // console.log("idparam", id);
   const [addItem, setaddItem] = useState(0);
-  
+  const [restaurantData, setRestaurantData] = useState();
+  const [menuData, setMenuData] = useState();
+
   const handleadditem = () => {
     setaddItem(addItem + 1);
   };
   const handledelitem = () => {
     setaddItem(addItem - 1);
   };
+  const getResturantItem = async () => {
+    const result = await axios.post(
+      "http://localhost:8087/restaurant/getItems",
+      { id: id }
+    );
+    setRestaurantData(result.data.resinfo);
+    setMenuData(result.data.menuList);
+  };
+  console.log(menuData);
+
+  useEffect(() => {
+    getResturantItem();
+  }, []);
+
   return (
     <div>
       <Navbar />
       <div className="details-container">
         <div className="resInfo">
           <div>
-            <h1>ResturantItems</h1>
-            <p>location</p>
+            <h1>{restaurantData?.resName}</h1>
+            <p>{restaurantData?.address}</p>
           </div>
           <div className="ratingBox">
             <p>4.1</p>
@@ -36,7 +54,9 @@ export default function ResturantItems() {
           </div>
         </div>
         <div>
-          <Accordion>
+        {menuData?.map((item, index)=>{
+          return(<>
+            <Accordion >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>chinese</Typography>
             </AccordionSummary>
@@ -52,7 +72,7 @@ export default function ResturantItems() {
                   </p>
                 </div>
                 <div className="itemimgBox">
-                  <img src={item1} className="itemImg" />
+                  <img src={item1} className="itemImg" alt="menuitmei" />
                   <div className="addtocart">
                     {addItem === 0 ? (
                       <p
@@ -78,7 +98,7 @@ export default function ResturantItems() {
                 </div>
               </div>
             </AccordionDetails>
-            <AccordionDetails>
+            <AccordionDetails disabled>
               <div className="resInfo">
                 <div className="itemsInfo">
                   <p className="itemtype"> non-veg</p>
@@ -90,7 +110,7 @@ export default function ResturantItems() {
                   </p>
                 </div>
                 <div className="itemimgBox">
-                  <img src={item1} className="itemImg" />
+                  <img src={item1} className="itemImg" alt="itemmenu" />
                   <div className="addtocart">
                     {addItem === 0 ? (
                       <p
@@ -117,6 +137,10 @@ export default function ResturantItems() {
               </div>
             </AccordionDetails>
           </Accordion>
+          </>)
+          
+        })}
+          
           <Accordion disabled>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>Disabled Accordion</Typography>

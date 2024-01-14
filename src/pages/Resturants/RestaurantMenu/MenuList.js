@@ -23,13 +23,13 @@ export default function MenuList() {
   const navigate = useNavigate();
 
   const getProducts = async () => {
-    // const result = await axios.post(
-    //   "https://adminbackend-kcks.onrender.com/products/getproductlist"
-    // );
+    const result = await axios.post(
+      "http://localhost:8087/restaurant/getmenulist"
+    );
 
-    // setProducts(result.data);
-    // setData(result.data);
-    // setLoading(false);
+    setProducts(result.data);
+    setData(result.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -112,17 +112,17 @@ export default function MenuList() {
                   >
                     <TableCell component="th" scope="row">
                       <img
-                        src={`../${row.image}`}
+                        src={row.itempic}
                         className="product-list-img"
                         alt="product"
                       ></img>
-                      {row.title}
+                      {row.itemname}
                     </TableCell>
                     <TableCell align="left">{row.description}</TableCell>
                     <TableCell align="left">{row.category}</TableCell>
                     <TableCell align="center">{row.quantity}</TableCell>
-                    <TableCell align="center">{row.properties.SKU}</TableCell>
-                    <TableCell align="center">₹{row.price}</TableCell>
+                    <TableCell align="center">{row.itemcuisine}</TableCell>
+                    <TableCell align="center">₹{row.itemprice}</TableCell>
                     <TableCell align="center">
                       <BorderColorIcon
                         className="edit-p-list"
