@@ -6,10 +6,12 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import item1 from "../../../assets/northIN.avif";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../../utils/interceptor";
+
+let category_name;
+let itemList;
 
 export default function ResturantItems() {
   let { id } = useParams();
@@ -25,12 +27,23 @@ export default function ResturantItems() {
     setaddItem(addItem - 1);
   };
   const getResturantItem = async () => {
-    const result = await axios.post(
-      "http://localhost:8087/restaurant/getItems",
-      { id: id }
-    );
-    setRestaurantData(result.data.resinfo);
-    setMenuData(result.data.menuList);
+    try {
+      const restaurantInfoResult = await axios.post(
+        "http://localhost:8087/restaurant/getRestaurantInfo",
+        { id: id }
+      );
+      console.log(restaurantInfoResult);
+      setRestaurantData(restaurantInfoResult.data.resinfo);
+      if (restaurantInfoResult.status === 200) {
+        const result = await axios.post(
+          "http://localhost:8087/restaurant/getItems",
+          { id: id }
+        );
+        setMenuData(result.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   console.log(menuData);
 
@@ -54,98 +67,82 @@ export default function ResturantItems() {
           </div>
         </div>
         <div>
-        {menuData?.map((item, index)=>{
-          return(<>
-            <Accordion >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>chinese</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="resInfo">
-                <div className="itemsInfo">
-                  <p className="itemtype"> non-veg</p>
-                  <p className="itemname">Chilly Fish</p> <span>295</span>
-                  <p className="itemdetails">
-                    Serves 1 | Battered fish simmered in soy sauce with
-                    chillies, capcicum and onion. 8 pc. Basa/ bombay vetki
-                    depending on availability.
-                  </p>
-                </div>
-                <div className="itemimgBox">
-                  <img src={item1} className="itemImg" alt="menuitmei" />
-                  <div className="addtocart">
-                    {addItem === 0 ? (
-                      <p
-                        style={{ margin: "0px", padding: "0px 25%" }}
-                        onClick={() => {
-                          setaddItem(1);
-                        }}
-                      >
-                        ADD
-                      </p>
-                    ) : (
+          {menuData?.map((categoryData, index) => {
+            category_name = Object.keys(categoryData)[0];
+            itemList = categoryData[category_name];
+            console.log(itemList.length);
+            return (
+              <>
+                <Accordion
+                  key={index}
+                  disabled={itemList.length === 0 ? true : false}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>{category_name}</Typography>
+                  </AccordionSummary>
+                  {itemList?.map((item, itemIndex) => {
+                    return (
                       <>
-                        <button className="countbtn" onClick={handledelitem}>
-                          -
-                        </button>
-                        {addItem}
-                        <button className="countbtn" onClick={handleadditem}>
-                          +
-                        </button>
+                        <AccordionDetails key={itemIndex}>
+                          <div className="resInfo">
+                            <div className="itemsInfo">
+                              <p className="itemtype">{item.itemtype}</p>
+                              <p className="itemname">{item.itemname}</p>
+                              <span>₹{item.itemprice}</span>
+                              <p className="itemdetails">
+                                {item.description}
+                                Serves 1 | Battered fish simmered in soy sauce
+                                with chillies, capcicum and onion. 8 pc. Basa/
+                                bombay vetki depending on availability.
+                              </p>
+                            </div>
+                            <div className="itemimgBox">
+                              <img
+                                src={item.itempic}
+                                className="itemImg"
+                                alt="menuitmei"
+                              />
+                              <div className="addtocart">
+                                {addItem === 0 ? (
+                                  <p
+                                    style={{
+                                      margin: "0px",
+                                      padding: "0px 25%",
+                                    }}
+                                    onClick={() => {
+                                      setaddItem(1);
+                                    }}
+                                  >
+                                    ADD
+                                  </p>
+                                ) : (
+                                  <>
+                                    <button
+                                      className="countbtn"
+                                      onClick={handledelitem}
+                                    >
+                                      -
+                                    </button>
+                                    {addItem}
+                                    <button
+                                      className="countbtn"
+                                      onClick={handleadditem}
+                                    >
+                                      +
+                                    </button>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </AccordionDetails>
                       </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </AccordionDetails>
-            <AccordionDetails disabled>
-              <div className="resInfo">
-                <div className="itemsInfo">
-                  <p className="itemtype"> non-veg</p>
-                  <p className="itemname">Chilly Fish</p> <span>295</span>
-                  <p className="itemdetails">
-                    Serves 1 | Battered fish simmered in soy sauce with
-                    chillies, capcicum and onion. 8 pc. Basa/ bombay vetki
-                    depending on availability.
-                  </p>
-                </div>
-                <div className="itemimgBox">
-                  <img src={item1} className="itemImg" alt="itemmenu" />
-                  <div className="addtocart">
-                    {addItem === 0 ? (
-                      <p
-                        style={{ margin: "0px", padding: "0px 25%" }}
-                        onClick={() => {
-                          setaddItem(1);
-                        }}
-                      >
-                        ADD
-                      </p>
-                    ) : (
-                      <>
-                        <button className="countbtn" onClick={handledelitem}>
-                          -
-                        </button>
-                        {addItem}
-                        <button className="countbtn" onClick={handleadditem}>
-                          +
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </AccordionDetails>
-          </Accordion>
-          </>)
-          
-        })}
-          
-          <Accordion disabled>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>Disabled Accordion</Typography>
-            </AccordionSummary>
-          </Accordion>
+                    );
+                  })}
+                </Accordion>
+              </>
+            );
+          })}
         </div>
       </div>
     </div>

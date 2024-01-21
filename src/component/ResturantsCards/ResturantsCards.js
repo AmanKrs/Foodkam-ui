@@ -3,7 +3,6 @@ import "./rescards.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 export default function ResturantsCards() {
   const [restDetails, setRestDetails] = useState();
 
@@ -32,7 +31,7 @@ export default function ResturantsCards() {
           return (
             <>
               <div
-              key={index}
+                key={index}
                 className="card"
                 onClick={() => {
                   handleresDetails(elem._id);

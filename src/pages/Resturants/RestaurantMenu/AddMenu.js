@@ -76,9 +76,7 @@ export default function AddMenu() {
             className="p-select-text"
             name="quantity"
             onChange={handleMenuFormdata}
-          >
-            
-          </input>
+          ></input>
         </div>
       </div>
       <div className="p-form-inputs">
@@ -90,13 +88,14 @@ export default function AddMenu() {
             onChange={handleMenuFormdata}
           >
             <option></option>
-            <option>Electronics</option>
-            <option>Home Appliances </option>
-            <option>Men's clothing</option>
-            <option>Women's clothing</option>
-            <option>Kids Wear</option>
-            <option>Jewelery</option>
-            <option>Mobiles</option>
+            <option>starter</option>
+            <option>chinese</option>
+            <option>Main Course</option>
+            <option>breads</option>
+            <option>rice</option>
+            <option>biryani</option>
+            <option>dessert</option>
+            <option>beverages</option>
           </select>
         </div>
         <div>
