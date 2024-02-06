@@ -10,6 +10,7 @@ export default function ProtectedLayoutRes() {
       setLoggedIn(false);
     }
   }, []);
+  
   return (
     <div>
       {loggedIn ? (

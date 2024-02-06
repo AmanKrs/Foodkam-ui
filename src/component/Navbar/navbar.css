@@ -68,3 +68,7 @@
 }
 .currentlocationdiv {
 }
+
+.logoutIcon:hover{
+color: red;
+}

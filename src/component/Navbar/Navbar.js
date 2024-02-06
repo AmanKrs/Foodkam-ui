@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logonew.png";
-import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { LogOut } from "lucide-react";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { BadgePercent } from "lucide-react";
 
 export default function Navbar() {
@@ -16,7 +17,23 @@ export default function Navbar() {
     window.location.reload();
   };
 
-  const handleAccount = () => {};
+  const handleAccount = () => {
+    navigate("/user-profile");
+  };
+
+  const handleuserLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("restoken");
+    navigate("/login");
+    window.location.reload();
+  };
+
+  const handleNavigatecart = () => {
+    if (localStorage.getItem("token")) {
+      navigate("/orderlist");
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token") == null) {
       setCustLogin(false);
@@ -37,53 +54,46 @@ export default function Navbar() {
             <li className="navlist" onClick={handleLogin}>
               Login
             </li>
-            <li className="navlist"> Sign up </li>
           </nav>
         </div>
       )}
       {custLogin && (
-        <>
-          <div className="loggedheader">
-            <div className="loggednavbar">
-              <img src={logo} alt="logo for app" className="navbarlogo" />
-              <div className="currentlocationdiv">location</div>
-            </div>
-            <nav className="lnavbar">
-              <li className="cart">
-                <BadgePercent /> <span>Offers</span>
-              </li>
-              <li className="cart" onClick={handleAccount}>
-                Account
-              </li>
-              <li className="cart">
-                <LocalMallIcon size={30} color="primary" />
-                <span>Cart</span>
-              </li>
-            </nav>
+        <div className="loggedheader">
+          <div className="loggednavbar">
+            <img src={logo} alt="logo for app" className="navbarlogo" />
+            <div className="currentlocationdiv">location</div>
           </div>
-        </>
+          <nav className="lnavbar">
+            <li className="cart">
+              <BadgePercent /> <span>Offers</span>
+            </li>
+            <li className="cart" onClick={handleAccount}>
+              Account
+            </li>
+            <li className="cart" onClick={handleNavigatecart}>
+              <LocalMallIcon size={30} color="primary" />
+              <span>Cart</span>
+            </li>
+            <li className="cart" onClick={handleuserLogout}>
+              <LogOut className="logout" />
+            </li>
+          </nav>
+        </div>
       )}
       {resLogin && (
-        <>
-        <div className="loggedheader">
-            <div className="loggednavbar">
-              <img src={logo} alt="logo for app" className="navbarlogo" />
-              <div className="currentlocationdiv">location</div>
-            </div>
-            <nav className="lnavbar">
-              <li className="cart">
-                <BadgePercent /> <span>Offers</span>
-              </li>
-              <li className="cart" onClick={handleAccount}>
-                Account
-              </li>
-              <li className="cart">
-                <LocalMallIcon fontSize="medium" color="success" />
-                <span>Cart</span>
-              </li>
-            </nav>
-          </div>
-        </>
+        <div className="header">
+          <img src={logo} alt="logo for app" className="navlogo" />
+          <nav className="navbar">
+            <li className="navlist"> Home</li>
+            <li className="navlist"> About</li>
+            <li className="navlist" onClick={handleLogin}>
+              Account
+            </li>
+            <li className="navlist" onClick={handleuserLogout}>
+              <LogOut className="logout" />
+            </li>
+          </nav>
+        </div>
       )}
     </>
   );

@@ -10,6 +10,9 @@ import RestaurantProfile from "../../pages/Resturants/RestaurantProfile/Restaura
 import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails"
 import AddMenu from "../../pages/Resturants/RestaurantMenu/AddMenu";
 import MenuList from "../../pages/Resturants/RestaurantMenu/MenuList";
+import UserProfile from "../../pages/UserProfile/UserProfile";
+import Cart from "../Cart/Cart";
+
 export default function Content() {
   return (
     <div>
@@ -17,16 +20,23 @@ export default function Content() {
         <Route path="/" element={<ProtectedLayout />}>
           <Route path="/" element={<Home />}></Route>
           <Route path="/resturants/:id" element={<ResturantItems />}></Route>
+          <Route path="/user-profile" element={<UserProfile />}></Route>
+          <Route path="/orderlist" element={<Cart />}></Route>
         </Route>
+        {/* </Routes>
+        <Routes> */}
         <Route path="/partner" element={<ProtectedLayoutRes />}>
           <Route path="/partner" element={<AddResturant />}></Route>
-          <Route
-            path="/partner/profile"
-            element={<RestaurantProfile />}
-          >
+          <Route path="/partner/profile" element={<RestaurantProfile />}>
             <Route path="/partner/profile" element={<AddMenu />}></Route>
-            <Route path="/partner/profile/menulist" element={<MenuList />}></Route>
-            <Route path="/partner/profile/edit-menu" element={<EditResturantDetails />}></Route>
+            <Route
+              path="/partner/profile/menulist"
+              element={<MenuList />}
+            ></Route>
+            <Route
+              path="/partner/profile/edit-menu"
+              element={<EditResturantDetails />}
+            ></Route>
           </Route>
         </Route>
       </Routes>

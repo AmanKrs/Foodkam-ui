@@ -20,11 +20,26 @@ export default function ResturantItems() {
   const [restaurantData, setRestaurantData] = useState();
   const [menuData, setMenuData] = useState();
 
-  const handleadditem = () => {
+  const handleadditem = async (item) => {
     setaddItem(addItem + 1);
+    const addtocartresult = await axios.post(
+      "http://localhost:8087/cart/addtocart",
+      { item, addItem }
+    );
   };
-  const handledelitem = () => {
+  const handledelitem = async (item) => {
     setaddItem(addItem - 1);
+    const addtocartresult = await axios.post(
+      "http://localhost:8087/cart/addtocart",
+      { item, addItem }
+    );
+  };
+
+  const handleaddtocart = async (item) => {
+    const addtocartresult = await axios.post(
+      "http://localhost:8087/cart/addtocart",
+      { item, addItem }
+    );
   };
   const getResturantItem = async () => {
     try {
@@ -111,6 +126,7 @@ export default function ResturantItems() {
                                     }}
                                     onClick={() => {
                                       setaddItem(1);
+                                      handleaddtocart(item);
                                     }}
                                   >
                                     ADD
@@ -119,14 +135,18 @@ export default function ResturantItems() {
                                   <>
                                     <button
                                       className="countbtn"
-                                      onClick={handledelitem}
+                                      onClick={() => {
+                                        handledelitem(item);
+                                      }}
                                     >
                                       -
                                     </button>
                                     {addItem}
                                     <button
                                       className="countbtn"
-                                      onClick={handleadditem}
+                                      onClick={() => {
+                                        handleadditem(item);
+                                      }}
                                     >
                                       +
                                     </button>
