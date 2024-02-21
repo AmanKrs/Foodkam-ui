@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../../utils/interceptor";
+import ItemList from "./ItemList";
 
 let category_name;
 let itemList;
@@ -16,31 +17,9 @@ let itemList;
 export default function ResturantItems() {
   let { id } = useParams();
   // console.log("idparam", id);
-  const [addItem, setaddItem] = useState(0);
   const [restaurantData, setRestaurantData] = useState();
   const [menuData, setMenuData] = useState();
 
-  const handleadditem = async (item) => {
-    setaddItem(addItem + 1);
-    const addtocartresult = await axios.post(
-      "http://localhost:8087/cart/addtocart",
-      { item, addItem }
-    );
-  };
-  const handledelitem = async (item) => {
-    setaddItem(addItem - 1);
-    const addtocartresult = await axios.post(
-      "http://localhost:8087/cart/addtocart",
-      { item, addItem }
-    );
-  };
-
-  const handleaddtocart = async (item) => {
-    const addtocartresult = await axios.post(
-      "http://localhost:8087/cart/addtocart",
-      { item, addItem }
-    );
-  };
   const getResturantItem = async () => {
     try {
       const restaurantInfoResult = await axios.post(
@@ -97,65 +76,67 @@ export default function ResturantItems() {
                   </AccordionSummary>
                   {itemList?.map((item, itemIndex) => {
                     return (
+                      // <>
+                      //   <AccordionDetails key={itemIndex}>
+                      //     <div className="resInfo">
+                      //       <div className="itemsInfo">
+                      //         <p className="itemtype">{item.itemtype}</p>
+                      //         <p className="itemname">{item.itemname}</p>
+                      //         <span>₹{item.itemprice}</span>
+                      //         <p className="itemdetails">
+                      //           {item.description}
+                      //           Serves 1 | Battered fish simmered in soy sauce
+                      //           with chillies, capcicum and onion. 8 pc. Basa/
+                      //           bombay vetki depending on availability.
+                      //         </p>
+                      //       </div>
+                      //       <div className="itemimgBox">
+                      //         <img
+                      //           src={item.itempic}
+                      //           className="itemImg"
+                      //           alt="menuitmei"
+                      //         />
+                      //         <div className="addtocart">
+                      //           {addItem === 0 ? (
+                      //             <p
+                      //               style={{
+                      //                 margin: "0px",
+                      //                 padding: "0px 25%",
+                      //               }}
+                      //               onClick={() => {
+                      //                 handleaddtocart(item);
+                      //               }}
+                      //             >
+                      //               ADD
+                      //             </p>
+                      //           ) : (
+                      //             <>
+                      //               <button
+                      //                 className="countbtn"
+                      //                 onClick={() => {
+                      //                   handledelitem(item);
+                      //                 }}
+                      //               >
+                      //                 -
+                      //               </button>
+                      //               {addItem}
+                      //               <button
+                      //                 className="countbtn"
+                      //                 onClick={() => {
+                      //                   handleadditem(item);
+                      //                 }}
+                      //               >
+                      //                 +
+                      //               </button>
+                      //             </>
+                      //           )}
+                      //         </div>
+                      //       </div>
+                      //     </div>
+                      //   </AccordionDetails>
+                      // </>
                       <>
-                        <AccordionDetails key={itemIndex}>
-                          <div className="resInfo">
-                            <div className="itemsInfo">
-                              <p className="itemtype">{item.itemtype}</p>
-                              <p className="itemname">{item.itemname}</p>
-                              <span>₹{item.itemprice}</span>
-                              <p className="itemdetails">
-                                {item.description}
-                                Serves 1 | Battered fish simmered in soy sauce
-                                with chillies, capcicum and onion. 8 pc. Basa/
-                                bombay vetki depending on availability.
-                              </p>
-                            </div>
-                            <div className="itemimgBox">
-                              <img
-                                src={item.itempic}
-                                className="itemImg"
-                                alt="menuitmei"
-                              />
-                              <div className="addtocart">
-                                {addItem === 0 ? (
-                                  <p
-                                    style={{
-                                      margin: "0px",
-                                      padding: "0px 25%",
-                                    }}
-                                    onClick={() => {
-                                      setaddItem(1);
-                                      handleaddtocart(item);
-                                    }}
-                                  >
-                                    ADD
-                                  </p>
-                                ) : (
-                                  <>
-                                    <button
-                                      className="countbtn"
-                                      onClick={() => {
-                                        handledelitem(item);
-                                      }}
-                                    >
-                                      -
-                                    </button>
-                                    {addItem}
-                                    <button
-                                      className="countbtn"
-                                      onClick={() => {
-                                        handleadditem(item);
-                                      }}
-                                    >
-                                      +
-                                    </button>
-                                  </>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </AccordionDetails>
+                        <ItemList item={item} itemIndex={itemIndex} />
                       </>
                     );
                   })}

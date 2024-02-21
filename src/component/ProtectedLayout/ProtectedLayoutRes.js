@@ -3,11 +3,11 @@ import { Outlet } from "react-router-dom";
 import Landing from "../../pages/Landing/Landing";
 
 export default function ProtectedLayoutRes() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("restoken") == null) {
-      setLoggedIn(false);
+    if (localStorage.getItem("restoken") !== null) {
+      setLoggedIn(true);
     }
   }, []);
   

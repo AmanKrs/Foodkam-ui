@@ -13,7 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="*" element={<Content />}></Route>
-
+            {/* <Route path="/" element={<ProtectedLayout />} /> */}
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/partner" element={<AddResturant />}></Route>
