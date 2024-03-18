@@ -33,7 +33,7 @@ export default function ItemList(props) {
 
   return (
     <>
-      <AccordionDetails key={itemIndex}>
+      <AccordionDetails >
         <div className="resInfo">
           <div className="itemsInfo">
             <p className="itemtype">{item.itemtype}</p>

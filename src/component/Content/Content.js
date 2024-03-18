@@ -7,7 +7,7 @@ import AddResturant from "../../pages/Resturants/RegisterResturant/AddResturant"
 import ProtectedLayoutRes from "../ProtectedLayout/ProtectedLayoutRes";
 import ResturantItems from "../../pages/Resturants/ResturantItems/ResturantItems";
 import RestaurantProfile from "../../pages/Resturants/RestaurantProfile/RestaurantProfile";
-import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails"
+import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails";
 import AddMenu from "../../pages/Resturants/RestaurantMenu/AddMenu";
 import MenuList from "../../pages/Resturants/RestaurantMenu/MenuList";
 import UserProfile from "../../pages/UserProfile/UserProfile";

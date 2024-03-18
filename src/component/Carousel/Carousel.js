@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import burger from "../../assets/Foods/Burger.webp"
-import northIN from "../../assets/northIN.avif"
-export default function Carousel() {
+import { useRef } from "react";
+import burger from "../../assets/Foods/Burger.webp";
+import northIN from "../../assets/northIN.avif";
+import "./carousel.css";
+
+export default function Carousel(props) {
   const cardmove = useRef();
   const prev = () => {
     cardmove.current.scrollBy({
@@ -19,7 +21,7 @@ export default function Carousel() {
   };
   return (
     <>
-      <h1>Best offers for you</h1>
+      <h1>{props.title}</h1>
       <div className="carousel-head">
         <div className="carousel-container">
           <div className="carousel-btn-div">
@@ -32,14 +34,30 @@ export default function Carousel() {
           </div>
 
           <div className="carousel-list" ref={cardmove}>
-            <div className="carousel-box"><img src={northIN} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={burger} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={northIN} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={burger} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={northIN} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={burger} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={northIN} className="carouselImg"/></div>
-            <div className="carousel-box"><img src={burger} className="carouselImg"/></div>
+            <div className="carousel-box">
+              <img src={northIN} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={burger} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={northIN} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={burger} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={northIN} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={burger} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={northIN} className="carouselImg" />
+            </div>
+            <div className="carousel-box">
+              <img src={burger} className="carouselImg" />
+            </div>
           </div>
         </div>
       </div>

@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./rescards.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { RestaurantDetails } from "../../redux/Restaurants/action";
 
 export default function ResturantsCards() {
-  const [restDetails, setRestDetails] = useState();
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const restDetails = useSelector((state) => state.data.restDetails);
+
+  useEffect(() => {
+    if (restDetails?.length == 0) {
+      dispatch(RestaurantDetails());
+    }
+  }, []);
 
   const handleresDetails = (id) => {
     navigate("resturants/" + id);
   };
-  const getresturantDetails = async () => {
-    const result = await axios.post(
-      "http://localhost:8087/partner/getresturantDetails"
-    );
-    console.log(result.data);
-    setRestDetails(result.data);
-  };
-
-  useEffect(() => {
-    getresturantDetails();
-  }, []);
 
   return (
     <>
@@ -29,36 +25,31 @@ export default function ResturantsCards() {
       <div className="rescard">
         {restDetails?.map((elem, index) => {
           return (
-            <>
-              <div
-                key={index}
-                className="card"
-                onClick={() => {
-                  handleresDetails(elem._id);
-                }}
-              >
-                <div className="cardimage">
-                  <img
-                    src={elem.resprofilepic}
-                    className="resdp"
-                  />
+            <div
+              key={index}
+              className="card"
+              onClick={() => {
+                handleresDetails(elem._id);
+              }}
+            >
+              <div className="cardimage">
+                <img src={elem.resprofilepic} className="resdp" />
+              </div>
+              <div className="carddetail">
+                <div className="restitle">
+                  <h3 className="resname">{elem.resName}</h3>
                 </div>
-                <div className="carddetail">
-                  <div className="restitle">
-                    <h3 className="resname">{elem.resName}</h3>
+                <div className="">
+                  <div className="resdetails">
+                    <p className="restyp">{elem.cuisine}</p>
+                    <p className="restyp">{elem.restype}</p>
                   </div>
-                  <div className="">
-                    <div className="resdetails">
-                      <p className="restyp">{elem.cuisine}</p>
-                      <p className="restyp">{elem.restype}</p>
-                    </div>
-                    <div className="resdetails">
-                      <p className="resloc">{elem.address}</p>
-                    </div>
+                  <div className="resdetails">
+                    <p className="resloc">{elem.address}</p>
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

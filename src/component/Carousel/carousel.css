@@ -1,0 +1,51 @@
+/* item's carousel css */
+
+.carousel-head {
+  padding-left: 40px;
+  padding-bottom: 20px;
+}
+.carousel-container {
+  width: 98%;
+  box-sizing: border-box;
+  margin-top: 0px;
+  position: relative;
+}
+
+.carousel-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  gap: 20px;
+}
+.carousel-btn-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.carousel-box {
+  width: 200px;
+  height: auto;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+.carousel-list-offer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  gap: 220px;
+}
+.offerImg {
+  width: 400px;
+}
+.carousel-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.carouselImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}

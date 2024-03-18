@@ -7,8 +7,8 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { BadgePercent } from "lucide-react";
 
 export default function Navbar() {
-  const [custLogin, setCustLogin] = useState(true);
-  const [resLogin, setResLogin] = useState(true);
+  const [custLogin, setCustLogin] = useState(false);
+  const [resLogin, setResLogin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,11 +35,11 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token") == null) {
-      setCustLogin(false);
+    if (localStorage.getItem("token") !== null) {
+      setCustLogin(true);
     }
-    if (localStorage.getItem("restoken") == null) {
-      setResLogin(false);
+    if (localStorage.getItem("restoken") !== null) {
+      setResLogin(true);
     }
   }, []);
 

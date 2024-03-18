@@ -1,0 +1,26 @@
+.cart-container {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  background-color: #f8f8f8;
+}
+.emptyImgdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 30px;
+}
+.emptyImg {
+  border-radius: 50%;
+  margin-bottom: 20px;
+  width: auto;
+}
+.emptyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.carttohome {
+  margin-bottom: 25px;
+}
