@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./resItems.css";
 import Navbar from "../../../component/Navbar/Navbar";
 import Accordion from "@mui/material/Accordion";
@@ -6,43 +6,27 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import "../../../utils/interceptor";
+
 import ItemList from "./ItemList";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ResturantInfo,
+  ResturantsMenu,
+} from "../../../redux/RestaurantsMenu/action";
 
 let category_name;
 let itemList;
 
 export default function ResturantItems() {
   let { id } = useParams();
-  // console.log("idparam", id);
-  const [restaurantData, setRestaurantData] = useState();
-  const [menuData, setMenuData] = useState();
-
-  const getResturantItem = async () => {
-    try {
-      const restaurantInfoResult = await axios.post(
-        "http://localhost:8087/restaurant/getRestaurantInfo",
-        { id: id }
-      );
-      console.log(restaurantInfoResult);
-      setRestaurantData(restaurantInfoResult.data.resinfo);
-      if (restaurantInfoResult.status === 200) {
-        const result = await axios.post(
-          "http://localhost:8087/restaurant/getItems",
-          { id: id }
-        );
-        setMenuData(result.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const dispatch = useDispatch();
+  const restaurantData = useSelector((state) => state.restInfo.restaurantData);
+  const menuData = useSelector((state) => state.restInfo.menuData);
   console.log(menuData);
-
   useEffect(() => {
-    getResturantItem();
-  }, []);
+    dispatch(ResturantInfo(id));
+    dispatch(ResturantsMenu(id));
+  }, [id]);
 
   return (
     <div>
@@ -62,7 +46,7 @@ export default function ResturantItems() {
         <div>
           {menuData?.map((categoryData, index) => {
             category_name = Object.keys(categoryData)[0];
-            
+
             itemList = categoryData[category_name];
             console.log(itemList);
             return (
@@ -74,13 +58,7 @@ export default function ResturantItems() {
                   <Typography>{category_name}</Typography>
                 </AccordionSummary>
                 {itemList?.map((item, itemIndex) => {
-                  return (
-                    <ItemList
-                      item={item}
-                      itemIndex={itemIndex}
-                      key={itemIndex}
-                    />
-                  );
+                  return <ItemList item={item} key={itemIndex} />;
                 })}
               </Accordion>
             );

@@ -2,19 +2,64 @@ import React, { useEffect, useState } from "react";
 import "./resItems.css";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import axios from "axios";
-import "../../../utils/interceptor";
+// import "../../../utils/interceptor";
+import { useDispatch, useSelector } from "react-redux";
+import { AddToCart } from "../../../redux/Cart/action";
 
 export default function ItemList(props) {
-  const { item, itemIndex } = props;
-  const [addItem, setaddItem] = useState(0);
+  const { item } = props;
+  const dispatch = useDispatch();
+  const quantity = useSelector((state) => state.cartDetails.addToCart);
+  console.log(quantity);
+  const [addItem, setaddItem] = useState(quantity);
 
   const handleadditem = async (item) => {
-    setaddItem(addItem + 1);
-    const addItemResult = await axios.post(
-      "http://localhost:8087/cart/addtocart",
-      { item, addItem }
+    setaddItem((quantity) => quantity + 1);
+    const payload = {
+      item: item,
+      quantity: addItem,
+    };
+    dispatch(
+      AddToCart({
+        payload,
+        // cb: (result) => {
+        //   console.log(result);
+        //   if (result.status == 200) {
+        //     setOpen(true);
+        //   }
+        // },
+      })
     );
+    // setaddItem(addItem + 1);
+    // const addItemResult = await axios.post(
+    //   "http://localhost:8087/cart/addtocart",
+    //   { item, addItem }
+    // );console.log(addItemResult.data.msg.quantity);
   };
+
+  const getcountitem = async (item) => {
+    const resultcount = await axios.post(
+      "http://localhost:8087/cart/getcartItem",
+      item
+    );
+    // console.log(resultcount.data?.itemInCart[0]?.quant);
+    let itemcountinCart = resultcount.data?.itemInCart[0]?.quant;
+    // var itemnewlist = JSON.parse(JSON.stringify(item));
+    // itemnewlist.itemcountinCart = itemcountinCart;
+    console.log(typeof itemcountinCart);
+    if (typeof itemcountinCart == "number") {
+      setaddItem(Number(itemcountinCart));
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      // console.log(item);
+      getcountitem(item);
+    }, 100);
+  }, [item, addItem]);
+
+  // console.log(typeof addItem);
   const handledelitem = async (item) => {
     setaddItem((prev) => prev - 1);
     const delItemResult = await axios.post(
@@ -29,11 +74,12 @@ export default function ItemList(props) {
       "http://localhost:8087/cart/addtocart",
       { item, addItem }
     );
+    // console.log(addToCartResult.data);
   };
 
   return (
     <>
-      <AccordionDetails >
+      <AccordionDetails>
         <div className="resInfo">
           <div className="itemsInfo">
             <p className="itemtype">{item.itemtype}</p>
@@ -49,14 +95,14 @@ export default function ItemList(props) {
           <div className="itemimgBox">
             <img src={item.itempic} className="itemImg" alt="menuitmei" />
             <div className="addtocart">
-              {addItem === 0 ? (
+              {!addItem ? (
                 <p
                   style={{
                     margin: "0px",
                     padding: "0px 25%",
                   }}
                   onClick={() => {
-                    handleaddtocart(item);
+                    handleadditem(item);
                   }}
                 >
                   ADD
@@ -71,7 +117,7 @@ export default function ItemList(props) {
                   >
                     -
                   </button>
-                  {addItem}
+                  {addItem === 0 ? "ADD" : addItem}
                   <button
                     className="countbtn"
                     onClick={() => {
