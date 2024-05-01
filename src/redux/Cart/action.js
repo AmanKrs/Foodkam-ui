@@ -19,3 +19,21 @@ export const AddToCart = createAsyncThunk(
     }
   }
 );
+
+export const DelfromCart = createAsyncThunk(
+  "delfromCart",
+
+  async ({ payload }) => {
+    console.log(payload);
+    try {
+      const delItemResult = await axios.post(
+        "http://localhost:8087/cart/removeCartItem",
+        payload
+      );
+      console.log(delItemResult.data.result[0].qauntOfItem);
+      return delItemResult.data.result[0].qauntOfItem;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);

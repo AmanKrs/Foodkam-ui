@@ -24,3 +24,31 @@
 .carttohome {
   margin-bottom: 25px;
 }
+.cartInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0px;
+  padding: 0px 20px;
+  gap: 40px;
+}
+
+.cartamountBox {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+.addedcart {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  width: max-content;
+  text-align: center;
+  padding: 5px;
+  color: green;
+  font-weight: 500;
+}

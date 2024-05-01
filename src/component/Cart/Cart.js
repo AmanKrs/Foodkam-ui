@@ -3,9 +3,11 @@ import Navbar from "../Navbar/Navbar";
 import "./cart.css";
 import emptyCartImg from "../../assets/emptyCart.png";
 import { NavLink } from "react-router-dom";
+import CartItem from "./CartItem";
 export default function Cart() {
-  const [emptyCart, setEmptyCart] = useState(true);
-
+  
+  const [emptyCart, setEmptyCart] = useState(false);
+const item={}
   
   return (
     <>
@@ -38,7 +40,10 @@ export default function Cart() {
             )}
             {!emptyCart && (
               <>
-                <div>cart item</div>
+                <div className="cartdiv">
+
+                  <CartItem item={item}/>
+                </div>
               </>
             )}
           </div>

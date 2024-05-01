@@ -4,7 +4,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import axios from "axios";
 // import "../../../utils/interceptor";
 import { useDispatch, useSelector } from "react-redux";
-import { AddToCart } from "../../../redux/Cart/action";
+import { DelfromCart, AddToCart } from "../../../redux/Cart/action";
 
 export default function ItemList(props) {
   const { item } = props;
@@ -39,7 +39,7 @@ export default function ItemList(props) {
 
   const getcountitem = async (item) => {
     const resultcount = await axios.post(
-      "http://localhost:8087/cart/getcartItem",
+      "http://localhost:8087/cart/getItemQuant",
       item
     );
     // console.log(resultcount.data?.itemInCart[0]?.quant);
@@ -61,21 +61,37 @@ export default function ItemList(props) {
 
   // console.log(typeof addItem);
   const handledelitem = async (item) => {
+    // setaddItem((prev) => prev - 1);
+    // const delItemResult = await axios.post(
+    //   "http://localhost:8087/cart/removeCartItem",
+    //   { item, addItem }
+    // );
     setaddItem((prev) => prev - 1);
-    const delItemResult = await axios.post(
-      "http://localhost:8087/cart/removeCartItem",
-      { item, addItem }
+    const payload = {
+      item: item,
+      quantity: addItem,
+    };
+    dispatch(
+      DelfromCart({
+        payload,
+        // cb: (result) => {
+        //   console.log(result);
+        //   if (result.status == 200) {
+        //     setOpen(true);
+        //   }
+        // },
+      })
     );
   };
 
-  const handleaddtocart = async (item) => {
-    setaddItem(1);
-    const addToCartResult = await axios.post(
-      "http://localhost:8087/cart/addtocart",
-      { item, addItem }
-    );
-    // console.log(addToCartResult.data);
-  };
+  // const handleaddtocart = async (item) => {
+  //   setaddItem(1);
+  //   const addToCartResult = await axios.post(
+  //     "http://localhost:8087/cart/addtocart",
+  //     { item, addItem }
+  //   );
+  //   // console.log(addToCartResult.data);
+  // };
 
   return (
     <>
