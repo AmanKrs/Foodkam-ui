@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logonew.png";
 import { LogOut } from "lucide-react";
@@ -60,7 +60,10 @@ export default function Navbar() {
       {custLogin && (
         <div className="loggedheader">
           <div className="loggednavbar">
-            <img src={logo} alt="logo for app" className="navbarlogo" />
+            <NavLink to="/">
+              <img src={logo} alt="logo for app" className="navbarlogo" />
+            </NavLink>
+
             <div className="currentlocationdiv">location</div>
           </div>
           <nav className="lnavbar">

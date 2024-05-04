@@ -98,7 +98,9 @@ export default function ItemList(props) {
       <AccordionDetails>
         <div className="resInfo">
           <div className="itemsInfo">
-            <p className="itemtype">{item.itemtype}</p>
+            <p className="itemtype">
+              {item.itemtype.toLowerCase() === "veg" ? "🟩" : "🔴"}
+            </p>
             <p className="itemname">{item.itemname}</p>
             <span>₹{item.itemprice}</span>
             <p className="itemdetails">

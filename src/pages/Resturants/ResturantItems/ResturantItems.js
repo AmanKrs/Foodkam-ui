@@ -35,7 +35,7 @@ export default function ResturantItems() {
         <div className="resInfo">
           <div>
             <h1>{restaurantData?.resName}</h1>
-            <p>{restaurantData?.address}</p>
+            <p>📍{restaurantData?.address}</p>
           </div>
           <div className="ratingBox">
             <p>4.1</p>

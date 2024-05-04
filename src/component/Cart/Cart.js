@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import "./cart.css";
 import emptyCartImg from "../../assets/emptyCart.png";
 import { NavLink } from "react-router-dom";
 import CartItem from "./CartItem";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 export default function Cart() {
-  
-  const [emptyCart, setEmptyCart] = useState(false);
-const item={}
-  
+  const [emptyCart, setEmptyCart] = useState(true);
+  const [itemIncart, setItemInCart] = useState(null);
+
+  const quantity = useSelector((state) => state.cartDetails.addToCart);
+
+  const getCartItem = async () => {
+    try {
+      const responseData = await axios.get(
+        "http://localhost:8087/cart/getCartItems"
+      );
+      console.log(responseData);
+
+      if (responseData?.status === 200) {
+        setItemInCart(responseData.data);
+        setEmptyCart(false);
+      }
+      if (responseData?.status === 204) {
+        setEmptyCart(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setEmptyCart(true);
+    }
+  };
+
+  useEffect(() => {
+    getCartItem();
+  }, [quantity, emptyCart]);
+
   return (
     <>
       <Navbar />
@@ -41,8 +68,22 @@ const item={}
             {!emptyCart && (
               <>
                 <div className="cartdiv">
-
-                  <CartItem item={item}/>
+                  {itemIncart?.cartDetails?.map((elem, index) => {
+                    return (
+                      <CartItem
+                        key={index}
+                        item={elem.itemInfo}
+                        itemQuantInCart={elem.itemQuantInCart}
+                      />
+                    );
+                  })}
+                  <hr className="total-divider"></hr>
+                  <div className="cartInfo">
+                    <div className="itemsInfo">
+                      <h4>Total Amount</h4>
+                    </div>
+                    <h5>₹ {itemIncart?.totalCartAmount}.00</h5>
+                  </div>
                 </div>
               </>
             )}

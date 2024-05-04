@@ -34,7 +34,7 @@
 }
 
 .cartamountBox {
-  width: 40%;
+  width: 35%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -51,4 +51,20 @@
   padding: 5px;
   color: green;
   font-weight: 500;
+}
+.cartdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 10px;
+}
+.itemsInfo {
+  width: 40%;
+  font-size: 1rem;
+  padding: 0px 20px;
+}
+.total-divider{
+  width: 90%;
+  height: 1px;
+  color: black;
 }

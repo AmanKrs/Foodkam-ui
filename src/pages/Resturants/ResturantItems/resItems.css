@@ -12,11 +12,18 @@
 }
 .ratingBox {
   width: 80px;
-  height: 90px;
-  background-color: aqua;
+  height: 70px;
+  border-radius: 5px;
+  background-color: rgb(4, 105, 30);
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #fff;
+  padding: auto;
+}
+.ratingBox p {
+  padding: 0px;
+  margin: 4px;
 }
 .ratesep {
   margin: 0px;
@@ -32,8 +39,6 @@
 }
 .itemimgBox {
   width: 130px;
-
-  background-color: aqua;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +63,7 @@
   color: green;
   font-weight: 600;
 }
-.countbtn{
+.countbtn {
   border: none;
   color: green;
   font-weight: 600;
