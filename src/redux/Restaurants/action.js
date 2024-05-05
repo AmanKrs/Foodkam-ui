@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const apiurl = process.env.REACT_APP_API_URL;
 
 export const RestaurantDetails = createAsyncThunk(
   "getRestaurants",
@@ -7,7 +8,7 @@ export const RestaurantDetails = createAsyncThunk(
     try {
       console.log("called");
       const resultData = await axios.post(
-        "http://localhost:8087/partner/getresturantDetails"
+        `${apiurl}/partner/getresturantDetails`
       );
       console.log(resultData);
       return resultData.data;

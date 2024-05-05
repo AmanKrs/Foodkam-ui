@@ -12,6 +12,8 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const apiurl = process.env.REACT_APP_API_URL;
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -34,9 +36,9 @@ export default function AddResturant() {
     setActiveStep(0);
   };
 
-  const handleFinish =  async() => {
+  const handleFinish = async () => {
     const result = await axios.post(
-      "http://localhost:8087/partner/register",
+       `${apiurl}/partner/register`,
       resData
     );
     console.log(resData);
@@ -51,7 +53,14 @@ export default function AddResturant() {
   return (
     <>
       <h1 style={{ color: "#6e39cb", marginLeft: "80px" }}>Partner With Us</h1>
-      <hr style={{ color: "#6e39cb", marginLeft: "80px", marginTop: "-20px" , width:"30%"}}></hr>
+      <hr
+        style={{
+          color: "#6e39cb",
+          marginLeft: "80px",
+          marginTop: "-20px",
+          width: "30%",
+        }}
+      ></hr>
       <p style={{ color: "#6e39cb", marginLeft: "85px", marginTop: "0px" }}>
         Register your Restaurant
       </p>

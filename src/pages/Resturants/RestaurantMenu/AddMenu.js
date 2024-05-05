@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../../../utils/resInterceptor";
+const imgStorageurl = process.env.REACT_APP_Image_Storage;
 
 export default function AddMenu() {
   const [menuData, setMenuData] = useState();
@@ -23,7 +24,7 @@ export default function AddMenu() {
       itemPicData.append("file", e.target.files[0]);
       itemPicData.append("upload_preset", "foodkam");
       itemPicData.append("cloud_name", "ak2noteit");
-      fetch("https://api.cloudinary.com/v1_1/ak2noteit/image/upload", {
+      fetch(`${imgStorageurl}`, {
         method: "post",
         body: itemPicData,
       })
@@ -52,7 +53,7 @@ export default function AddMenu() {
 
   const handleAddItem = async () => {
     const menuItemData = await axios.post(
-      "http://localhost:8087/restaurant/addmenu",
+      "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/restaurant/addmenu",
       menuData
     );
     console.log(menuItemData);

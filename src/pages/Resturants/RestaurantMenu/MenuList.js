@@ -11,6 +11,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 // import "../ProductAppStyle/productform.css";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Loading from "../../../component/Loading/Loading";
+const apiurl = process.env.REACT_APP_API_URL;
 
 export default function MenuList() {
   //  const { searchItem } = useOutletContext();
@@ -24,7 +25,7 @@ export default function MenuList() {
 
   const getProducts = async () => {
     const result = await axios.post(
-      "http://localhost:8087/restaurant/getmenulist"
+      `${apiurl}/restaurant/getmenulist`
     );
 
     setProducts(result.data);

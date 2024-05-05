@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./addRestaurant.css";
+const imgStorageurl = process.env.REACT_APP_Image_Storage;
 
 export default function RestaurantInfo(props) {
   const { setResData } = props;
@@ -17,7 +18,7 @@ export default function RestaurantInfo(props) {
       itemPicData.append("file", e.target.files[0]);
       itemPicData.append("upload_preset", "foodkam");
       itemPicData.append("cloud_name", "ak2noteit");
-      fetch("https://api.cloudinary.com/v1_1/ak2noteit/image/upload", {
+      fetch(`${imgStorageurl}`, {
         method: "post",
         body: itemPicData,
       })

@@ -5,7 +5,7 @@ import axios from "axios";
 // import "../../../utils/interceptor";
 import { useDispatch, useSelector } from "react-redux";
 import { DelfromCart, AddToCart } from "../../../redux/Cart/action";
-
+const apiurl = process.env.REACT_APP_API_URL;
 export default function ItemList(props) {
   const { item } = props;
   const dispatch = useDispatch();
@@ -32,14 +32,14 @@ export default function ItemList(props) {
     );
     // setaddItem(addItem + 1);
     // const addItemResult = await axios.post(
-    //   "http://localhost:8087/cart/addtocart",
+    //   "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/cart/addtocart",
     //   { item, addItem }
     // );console.log(addItemResult.data.msg.quantity);
   };
 
   const getcountitem = async (item) => {
     const resultcount = await axios.post(
-      "http://localhost:8087/cart/getItemQuant",
+      `${apiurl}/cart/getItemQuant`,
       item
     );
     // console.log(resultcount.data?.itemInCart[0]?.quant);
@@ -63,7 +63,7 @@ export default function ItemList(props) {
   const handledelitem = async (item) => {
     // setaddItem((prev) => prev - 1);
     // const delItemResult = await axios.post(
-    //   "http://localhost:8087/cart/removeCartItem",
+    //   "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/cart/removeCartItem",
     //   { item, addItem }
     // );
     setaddItem((prev) => prev - 1);
@@ -87,7 +87,7 @@ export default function ItemList(props) {
   // const handleaddtocart = async (item) => {
   //   setaddItem(1);
   //   const addToCartResult = await axios.post(
-  //     "http://localhost:8087/cart/addtocart",
+  //     "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/cart/addtocart",
   //     { item, addItem }
   //   );
   //   // console.log(addToCartResult.data);

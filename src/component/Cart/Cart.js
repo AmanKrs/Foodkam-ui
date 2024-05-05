@@ -6,17 +6,18 @@ import { NavLink } from "react-router-dom";
 import CartItem from "./CartItem";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+
+const apiurl = process.env.REACT_APP_API_URL;
+
 export default function Cart() {
   const [emptyCart, setEmptyCart] = useState(true);
   const [itemIncart, setItemInCart] = useState(null);
 
   const quantity = useSelector((state) => state.cartDetails.addToCart);
-
+  console.log(apiurl);
   const getCartItem = async () => {
     try {
-      const responseData = await axios.get(
-        "http://localhost:8087/cart/getCartItems"
-      );
+      const responseData = await axios.get(`${apiurl}/cart/getCartItems`);
       console.log(responseData);
 
       if (responseData?.status === 200) {

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+const apiurl = process.env.REACT_APP_API_URL;
 
 export default function Register() {
-  const [custLogin, setCustLogin] = useState(true);
+ 
   const [userRegFormData, setUserRegFormData] = useState();
 
   const navigate = useNavigate();
@@ -16,20 +17,21 @@ export default function Register() {
   };
 
   const handleCustLogin = async () => {
-    try{
-      const res = await axios.post("http://localhost:8087/user/signup", userRegFormData)
+    try {
+      const res = await axios.post(
+        `${apiurl}/user/signup`,
+        userRegFormData
+      );
       console.log(userRegFormData);
-      console.log(res.status)
-      if(res.status===200){
+      console.log(res.status);
+      if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
         navigate("/");
         window.location.reload();
       }
-    }catch(e){
-console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  
-   
   };
 
   return (

@@ -3,6 +3,9 @@ import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import "./login.css";
+
+const apiurl = process.env.REACT_APP_API_URL;
+
 export default function Login() {
   const [custLogin, setCustLogin] = useState(true);
   const [resLogin, setResLogin] = useState(false);
@@ -11,27 +14,26 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleCustLogin = async () => {
-    console.log(loginFormData)
-    try{
+    console.log(loginFormData);
+    try {
       const result = await axios.post(
-        "http://localhost:8087/user/login",
+        `${apiurl}/user/login`,
         loginFormData
       );
-      if(result.status ===200){
+      if (result.status === 200) {
         localStorage.setItem("token", result.data.token);
         navigate("/");
         // window.location.reload();
       }
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-    
   };
-  const handleVerifyOtp = async() => {
+  const handleVerifyOtp = async () => {
     setVerifyOtp(!verifyOtp);
     // try{
     //   const result = await axios.post(
-    //     "http://localhost:8087/user/sendotp",
+    //     "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/user/sendotp",
     //     loginFormData
     //   );
     //   console.log(result)
@@ -40,21 +42,20 @@ export default function Login() {
     // }
   };
 
-  const handleResLogin = async() => {
-    try{
+  const handleResLogin = async () => {
+    try {
       const result = await axios.post(
-        "http://localhost:8087/partner/login",
+        `${apiurl}/partner/login`,
         loginFormData
       );
-      if(result.status ===200){
+      if (result.status === 200) {
         localStorage.setItem("restoken", result.data.token);
         navigate("/partner/profile");
         // window.location.reload();
       }
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-   
   };
   const handleCustButton = () => {
     setCustLogin(true);

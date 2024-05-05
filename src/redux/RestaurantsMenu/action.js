@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../utils/interceptor";
+const apiurl = process.env.REACT_APP_API_URL;
 
 export const ResturantInfo = createAsyncThunk(
   "getResturantInfo",
   async (payload) => {
     try {
       const restaurantInfoResult = await axios.post(
-        "http://localhost:8087/restaurant/getRestaurantInfo",
+       `${apiurl}/restaurant/getRestaurantInfo`,
         { id: payload }
       );
       console.log(restaurantInfoResult);
@@ -23,12 +24,12 @@ export const ResturantsMenu = createAsyncThunk(
   async (payload) => {
     try {
       const restaurantInfoResult = await axios.post(
-        "http://localhost:8087/restaurant/getRestaurantInfo",
+        `${apiurl}/restaurant/getRestaurantInfo`,
         { id: payload }
       );
       if (restaurantInfoResult.status === 200) {
         const result = await axios.post(
-          "http://localhost:8087/restaurant/getItems",
+           `${apiurl}/restaurant/getItems`,
           { id: payload }
         );
         return result.data;

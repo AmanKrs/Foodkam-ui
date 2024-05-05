@@ -2,6 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../utils/interceptor";
 
+const apiurl = process.env.REACT_APP_API_URL;
+
 export const AddToCart = createAsyncThunk(
   "addtoCart",
 
@@ -9,7 +11,7 @@ export const AddToCart = createAsyncThunk(
     console.log(payload);
     try {
       const cartItemResult = await axios.post(
-        "http://localhost:8087/cart/addtocart",
+        `${apiurl}/cart/addtocart`,
         payload
       );
       console.log(cartItemResult.data.result[0].qauntOfItem);
@@ -27,7 +29,7 @@ export const DelfromCart = createAsyncThunk(
     console.log(payload);
     try {
       const delItemResult = await axios.post(
-        "http://localhost:8087/cart/removeCartItem",
+        `${apiurl}/cart/removeCartItem`,
         payload
       );
       console.log(delItemResult.data.result[0].qauntOfItem);

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddToCart, DelfromCart } from "../../redux/Cart/action";
 import axios from "axios";
 
+const apiurl = process.env.REACT_APP_API_URL;
+
 export default function CartItem(props) {
   const { item, itemQuantInCart, totalCartAmount } = props;
   const dispatch = useDispatch();
@@ -32,7 +34,7 @@ export default function CartItem(props) {
 
   const getcountitem = async (item) => {
     const resultcount = await axios.post(
-      "http://localhost:8087/cart/getItemQuant",
+      `${apiurl}/cart/getItemQuant`,
       item
     );
 
