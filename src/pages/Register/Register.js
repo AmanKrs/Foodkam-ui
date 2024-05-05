@@ -4,7 +4,6 @@ import axios from "axios";
 const apiurl = process.env.REACT_APP_API_URL;
 
 export default function Register() {
- 
   const [userRegFormData, setUserRegFormData] = useState();
 
   const navigate = useNavigate();
@@ -18,15 +17,12 @@ export default function Register() {
 
   const handleCustLogin = async () => {
     try {
-      const res = await axios.post(
-        `${apiurl}/user/signup`,
-        userRegFormData
-      );
+      const res = await axios.post(`${apiurl}/user/signup`, userRegFormData);
       console.log(userRegFormData);
       console.log(res.status);
       if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
-        navigate("/");
+        // localStorage.setItem("token", res.data.token);
+        navigate("/login");
         window.location.reload();
       }
     } catch (e) {
