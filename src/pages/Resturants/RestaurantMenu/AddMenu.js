@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../../utils/resInterceptor";
 const imgStorageurl = process.env.REACT_APP_Image_Storage;
+const apiurl = process.env.REACT_APP_API_URL;
 
 export default function AddMenu() {
   const [menuData, setMenuData] = useState();
@@ -53,7 +54,7 @@ export default function AddMenu() {
 
   const handleAddItem = async () => {
     const menuItemData = await axios.post(
-      "http://ec2-3-110-103-234.ap-south-1.compute.amazonaws.com:8087/restaurant/addmenu",
+      `${apiurl}/restaurant/addmenu`,
       menuData
     );
     console.log(menuItemData);
