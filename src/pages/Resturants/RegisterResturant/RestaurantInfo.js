@@ -4,7 +4,7 @@ const imgStorageurl = process.env.REACT_APP_Image_Storage;
 
 export default function RestaurantInfo(props) {
   const { setResData } = props;
-  const [resDP, setResDP] = useState(false);
+  const [resDP, setResDP] = useState(true);
   const [mediaSize, setMediaSize] = useState(false);
   const [itemPicUrl, setItemPicUrl] = useState();
 
@@ -22,15 +22,13 @@ export default function RestaurantInfo(props) {
         method: "post",
         body: itemPicData,
       })
-        .then((res) => {
-          console.log(res);
-
-          res.json();
-          if (res.status === 200) {
+        .then((res) => res.json())
+        .then((itemPicData) => {
+          console.log(itemPicData);
+          if (itemPicData.status === 200) {
             setResDP(true);
           }
-        })
-        .then((itemPicData) => {
+
           setItemPicUrl(itemPicData?.secure_url.toString());
         })
         .catch((err) => {

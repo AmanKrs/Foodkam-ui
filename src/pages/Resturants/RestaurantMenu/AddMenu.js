@@ -31,15 +31,11 @@ export default function AddMenu() {
         method: "post",
         body: itemPicData,
       })
-        .then((res) => {
-          console.log(res);
-
-          res.json();
-          if (res.status === 200) {
+        .then((res) => res.json())
+        .then((itemPicData) => {
+          if (itemPicData.status === 200) {
             setResDP(true);
           }
-        })
-        .then((itemPicData) => {
           setItemPicUrl(itemPicData.secure_url.toString());
         })
         .catch((err) => {
