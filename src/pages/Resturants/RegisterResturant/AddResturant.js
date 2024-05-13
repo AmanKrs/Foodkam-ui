@@ -12,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const apiurl = process.env.REACT_APP_API_URL;
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -37,12 +38,13 @@ export default function AddResturant() {
   };
 
   const handleFinish = async () => {
-    const result = await axios.post(
-       `${apiurl}/partner/register`,
-      resData
-    );
-    console.log(resData);
-    navigate("/login");
+    try {
+      const result = await axios.post(`${apiurl}/partner/register`, resData);
+      console.log(result);
+      navigate("/login");
+    } catch (error) {
+      console.log("error");
+    }
   };
 
   const handleClose = (event, reason) => {
@@ -50,88 +52,93 @@ export default function AddResturant() {
       return;
     }
   };
+  const handleResSignIn = () => {
+    navigate("/login");
+  };
+
   return (
     <>
-      <h1 style={{ color: "#6e39cb", marginLeft: "80px" }}>Partner With Us</h1>
-      <hr
-        style={{
-          color: "#6e39cb",
-          marginLeft: "80px",
-          marginTop: "-20px",
-          width: "30%",
-        }}
-      ></hr>
-      <p style={{ color: "#6e39cb", marginLeft: "85px", marginTop: "0px" }}>
-        Register your Restaurant
-      </p>
-      <div className="details-container">
-        <Box sx={{ width: "100%", margin: "auto" }}>
-          <Stepper activeStep={activeStep} className="Stepperlabelcolor">
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const labelProps = {};
+      <div className="res-pro-container">
+        <div className="res-register-nav">
+          <div className="res-nav-head">
+            <h1 className="res-nav-h1">Partner With Us</h1>
+            <hr className="res-nav-hr"></hr>
+            <p className="res-nav-p">Register your Restaurant</p>
+          </div>
+          <h1 className="res-signIn-btn" onClick={handleResSignIn}>
+            Sign-In
+          </h1>
+        </div>
 
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
-          {activeStep === 0 && (
-            <RestaurantInfo setResData={setResData} resData={resData} />
-          )}
-          {activeStep === 1 && (
-            <RestaurantTime setResData={setResData} resData={resData} />
-          )}
+        <div className="ResAdd-container">
+          <Box sx={{ width: "100%", margin: "auto" }}>
+            <Stepper activeStep={activeStep} className="Stepperlabelcolor">
+              {steps.map((label, index) => {
+                const stepProps = {};
+                const labelProps = {};
 
-          {activeStep === steps.length ? (
-            <Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>
-                All steps completed - We&apos;re good to go...😍
-              </Typography>
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Box sx={{ flex: "1 1 auto" }} />
+                return (
+                  <Step key={label} {...stepProps}>
+                    <StepLabel {...labelProps}>{label}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
+            {activeStep === 0 && (
+              <RestaurantInfo setResData={setResData} resData={resData} />
+            )}
+            {activeStep === 1 && (
+              <RestaurantTime setResData={setResData} resData={resData} />
+            )}
 
-                <Button onClick={handleFinish}>Finish</Button>
-              </Box>
+            {activeStep === steps.length ? (
+              <Fragment>
+                <Typography sx={{ mt: 2, mb: 1 }}>
+                  All steps completed - We&apos;re good to go...😍
+                </Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Box sx={{ flex: "1 1 auto" }} />
 
-              <Snackbar
-                open={true}
-                autoHideDuration={6000}
-                onClose={handleClose}
-              >
-                <Alert
+                  <Button onClick={handleFinish}>Submit</Button>
+                </Box>
+
+                <Snackbar
+                  open={true}
+                  autoHideDuration={6000}
                   onClose={handleClose}
-                  severity={"success"}
-                  sx={{ width: "100%" }}
                 >
-                  Hello
-                </Alert>
-              </Snackbar>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  Back
-                </Button>
-                <Box sx={{ flex: "1 1 auto" }} />
-                {activeStep === steps.length - 1 && (
-                  <Button onClick={handleReset}>Reset</Button>
-                )}
-                <Button onClick={handleNext}>
-                  {activeStep === steps.length - 1 ? "Confrim" : "Next"}
-                </Button>
-              </Box>
-            </Fragment>
-          )}
-        </Box>
+                  <Alert
+                    onClose={handleClose}
+                    severity={"success"}
+                    sx={{ width: "100%" }}
+                  >
+                    Hello
+                  </Alert>
+                </Snackbar>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  {activeStep === steps.length - 1 && (
+                    <Button onClick={handleReset}>Reset</Button>
+                  )}
+                  <Button onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? "Confrim" : "Next"}
+                  </Button>
+                </Box>
+              </Fragment>
+            )}
+          </Box>
+        </div>
       </div>
     </>
   );

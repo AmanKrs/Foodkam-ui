@@ -37,6 +37,10 @@ export default function Content() {
               path="/partner/profile/edit-menu"
               element={<EditResturantDetails />}
             ></Route>
+            <Route
+              path="/partner/profile/:id"
+              element={<EditResturantDetails />}
+            ></Route>
           </Route>
         </Route>
       </Routes>

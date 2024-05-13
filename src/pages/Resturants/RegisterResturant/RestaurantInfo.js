@@ -4,12 +4,12 @@ const imgStorageurl = process.env.REACT_APP_Image_Storage;
 
 export default function RestaurantInfo(props) {
   const { setResData } = props;
-
+  const [resDP, setResDP] = useState(false);
   const [mediaSize, setMediaSize] = useState(false);
   const [itemPicUrl, setItemPicUrl] = useState();
 
   const handleItemPicdata = (e) => {
-    
+    console.log(e.target.files[0].type);
     if (
       e.target.files[0].type === "image/jpeg" ||
       e.target.files[0].type === "image/png"
@@ -22,9 +22,16 @@ export default function RestaurantInfo(props) {
         method: "post",
         body: itemPicData,
       })
-        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+
+          res.json();
+          if (res.status === 200) {
+            setResDP(true);
+          }
+        })
         .then((itemPicData) => {
-          setItemPicUrl(itemPicData.url.toString());
+          setItemPicUrl(itemPicData?.secure_url.toString());
         })
         .catch((err) => {
           console.log(err);
@@ -52,33 +59,33 @@ export default function RestaurantInfo(props) {
   };
 
   return (
-    <div className="product-form">
+    <div className="restaurant-form">
       <h3>Restaurant Information</h3>
-      <div className="p-form-inputs">
+      <div className="res-form-inputs">
         <div>
-          <label className="p-form-label"> Restaurant Name</label>
+          <label className="reslabel"> Restaurant Name</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             type="text"
             name="resName"
             onChange={handleProductFormdata}
           ></input>
         </div>
         <div>
-          <label className="p-form-label">Address</label>
+          <label className="reslabel">Address</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             name="address"
             type="text"
             onChange={handleProductFormdata}
           ></input>
         </div>
       </div>
-      <div className="p-form-inputs">
+      <div className="res-form-inputs">
         <div>
-          <label className="p-form-label">Owner Name</label>
+          <label className="reslabel">Owner Name</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             name="resowner"
             type="text"
             placeholder="Resturant Owner Name"
@@ -86,9 +93,9 @@ export default function RestaurantInfo(props) {
           ></input>
         </div>
         <div>
-          <label className="p-form-label">Mobile Number</label>
+          <label className="reslabel">Mobile Number</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             name="phone"
             type="text"
             placeholder="Mobile Number"
@@ -96,25 +103,30 @@ export default function RestaurantInfo(props) {
           ></input>
         </div>
       </div>
-      <div className="p-form-inputs">
+      <div className="res-form-inputs">
         <div>
-          <label className="p-form-label">Password</label>
+          <label className="reslabel">Password</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             type="password"
             name="password"
             onChange={handleProductFormdata}
           ></input>
         </div>
         <div>
-          <label className="p-form-label">Profile Picture</label>
+          <label className="reslabel">Profile Picture</label>
           <input
-            className="p-input-text"
+            className="additemcontainer"
             name="resitempic"
             type="file"
             onChange={handleItemPicdata}
           ></input>
-          <button name="resprofilepic" onClick={handlePicUpload}>
+          <button
+            name="resprofilepic"
+            className="upload-itempic-btn"
+            onClick={handlePicUpload}
+            disabled={resDP ? false : true}
+          >
             upload
           </button>
         </div>

@@ -11,6 +11,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 // import "../ProductAppStyle/productform.css";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Loading from "../../../component/Loading/Loading";
+import "./addResMenu.css";
 const apiurl = process.env.REACT_APP_API_URL;
 
 export default function MenuList() {
@@ -24,9 +25,7 @@ export default function MenuList() {
   const navigate = useNavigate();
 
   const getProducts = async () => {
-    const result = await axios.post(
-      `${apiurl}/restaurant/getmenulist`
-    );
+    const result = await axios.post(`${apiurl}/restaurant/getmenulist`);
 
     setProducts(result.data);
     setData(result.data);
@@ -86,69 +85,71 @@ export default function MenuList() {
 
   return (
     <div>
-      <h2 style={{ color: "#6e39cb" }}>Menu List</h2>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">Product</TableCell>
-                  <TableCell align="center">Description</TableCell>
-                  <TableCell align="center">Category</TableCell>
-                  <TableCell align="center">Quantity</TableCell>
-                  <TableCell align="center">SKU</TableCell>
-                  <TableCell align="center">Price</TableCell>
-                  <TableCell align="center">Edit</TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {displayProduct?.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <img
-                        src={row.itempic}
-                        className="product-list-img"
-                        alt="product"
-                      ></img>
-                      {row.itemname}
-                    </TableCell>
-                    <TableCell align="left">{row.description}</TableCell>
-                    <TableCell align="left">{row.category}</TableCell>
-                    <TableCell align="center">{row.quantity}</TableCell>
-                    <TableCell align="center">{row.itemcuisine}</TableCell>
-                    <TableCell align="center">₹{row.itemprice}</TableCell>
-                    <TableCell align="center">
-                      <BorderColorIcon
-                        className="edit-p-list"
-                        onClick={() => {
-                          navigateEdit(row);
-                        }}
-                      />
-                    </TableCell>
+      <h3 style={{ color: "#6e39cb" }}>Menu List</h3>
+      <div style={{ padding:"20px" }}>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Product</TableCell>
+                    <TableCell align="center">Description</TableCell>
+                    <TableCell align="center">Category</TableCell>
+                    <TableCell align="center">Quantity</TableCell>
+                    <TableCell align="center">Type</TableCell>
+                    <TableCell align="center">Price</TableCell>
+                    <TableCell align="center">Edit</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            {product.length == 0 && searchItem !== null && (
-              <>
-                <h1>Not Found</h1>
-              </>
-            )}
-            {product.length == 0 && searchItem == null && (
-              <>
-                <Loading />
-              </>
-            )}
-          </TableContainer>
-        </>
-      )}
+                </TableHead>
+
+                <TableBody>
+                  {displayProduct?.map((row, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        <img
+                          src={row.itempic}
+                          className="product-list-img"
+                          alt="product"
+                        ></img>
+                        {row.itemname}
+                      </TableCell>
+                      <TableCell align="left">{row.description}</TableCell>
+                      <TableCell align="left">{row.category}</TableCell>
+                      <TableCell align="center">{row.quantity}</TableCell>
+                      <TableCell align="center">{row.itemtype}</TableCell>
+                      <TableCell align="center">₹{row.itemprice}</TableCell>
+                      <TableCell align="center">
+                        <BorderColorIcon
+                          className="edit-p-list"
+                          onClick={() => {
+                            navigateEdit(row);
+                          }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              {product.length == 0 && searchItem !== null && (
+                <>
+                  <h1>Not Found</h1>
+                </>
+              )}
+              {product.length == 0 && searchItem == null && (
+                <>
+                  <Loading />
+                </>
+              )}
+            </TableContainer>
+          </>
+        )}
+      </div>
       <div className="pagination">
         <div>
           <select onChange={(e) => setItemsPerPage(e.target.value)}>
@@ -161,17 +162,16 @@ export default function MenuList() {
         </div>
         <div>
           <button onClick={handlePagePrev}>Prev </button>&nbsp;
-          {arr.map((elem) => {
+          {arr.map((elem, index) => {
             return (
-              <>
-                <span
-                  onClick={() => {
-                    setCurrentIndex(elem);
-                  }}
-                >
-                  <button>{elem}</button>&nbsp;
-                </span>
-              </>
+              <span
+                key={index}
+                onClick={() => {
+                  setCurrentIndex(elem);
+                }}
+              >
+                <button>{elem}</button>&nbsp;
+              </span>
             );
           })}
           <button onClick={handlePageNxt}>Next</button>

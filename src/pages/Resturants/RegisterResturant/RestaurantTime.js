@@ -11,33 +11,33 @@ export default function RestaurantTime(props) {
   };
 
   return (
-    <div className="product-form">
+    <div className="restaurant-form">
       <h3>Restaurant Type & Timings</h3>
-      <div className="p-form-inputs">
+      <div className="res-form-inputs">
         <div>
-          <label className="p-form-label">Opening Time</label>
+          <label className="reslabel">Opening Time</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             type="time"
             name="resopentime"
             onChange={handleProductFormdata}
           ></input>
         </div>
         <div>
-          <label className="p-form-label">Closing Time</label>
+          <label className="reslabel">Closing Time</label>
           <input
-            className="p-input-text"
+            className="res-input-text"
             name="resclosetime"
             type="time"
             onChange={handleProductFormdata}
           ></input>
         </div>
       </div>
-      <div className="p-form-inputs">
+      <div className="res-form-inputs">
         <div>
-          <label className="p-form-label">Type</label>
+          <label className="reslabel">Type</label>
           <select
-            className="p-select-text"
+            className="res-select-text"
             onChange={handleProductFormdata}
             name="restype"
           >
@@ -50,9 +50,9 @@ export default function RestaurantTime(props) {
         </div>
 
         <div>
-          <label className="p-form-label">Cuisine Type</label>
+          <label className="reslabel">Cuisine Type</label>
           <select
-            className="p-select-text"
+            className="res-select-text"
             onChange={handleProductFormdata}
             name="cuisine"
           >
