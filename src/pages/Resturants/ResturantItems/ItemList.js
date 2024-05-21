@@ -38,10 +38,7 @@ export default function ItemList(props) {
   };
 
   const getcountitem = async (item) => {
-    const resultcount = await axios.post(
-      `${apiurl}/cart/getItemQuant`,
-      item
-    );
+    const resultcount = await axios.post(`${apiurl}/cart/getItemQuant`, item);
     // console.log(resultcount.data?.itemInCart[0]?.quant);
     let itemcountinCart = resultcount.data?.itemInCart[0]?.quant;
     // var itemnewlist = JSON.parse(JSON.stringify(item));
@@ -95,13 +92,19 @@ export default function ItemList(props) {
 
   return (
     <>
-      <AccordionDetails>
-        <div className="resInfo">
+      <AccordionDetails className="itembar">
+        <div className="itemInfo-container">
           <div className="itemsInfo">
-            <p className="itemtype">
-              {item.itemtype.toLowerCase() === "veg" ? "🟩" : "🔴"}
+            <p className="itemname">
+              <span
+                className={
+                  item.itemtype.toLowerCase() === "veg"
+                    ? "veg-dot"
+                    : "nonveg-box"
+                }
+              ></span>
+              {item.itemname}
             </p>
-            <p className="itemname">{item.itemname}</p>
             <span>₹{item.itemprice}</span>
             <p className="itemdetails">
               {item.description}

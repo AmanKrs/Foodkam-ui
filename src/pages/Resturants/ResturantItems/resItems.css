@@ -1,6 +1,6 @@
 .details-container {
   margin-top: 60px;
-  padding: 10px 250px;
+  padding: 10px 150px;
 }
 .resInfo {
   display: flex;
@@ -29,6 +29,14 @@
   margin: 0px;
   padding: 0px;
   width: 60px;
+}
+.itemInfo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px;
+  padding: 0px 20px;
+  gap: 40px;
 }
 .itemsInfo {
   display: flex;
@@ -84,4 +92,61 @@
   font-size: 12px;
 
   color: gray;
+}
+.itemavail {
+}
+.noitemavail {
+  display: none;
+}
+.round-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+}
+@media only screen and (max-width: 640px) {
+  .details-container {
+    margin-top: 60px;
+    padding: 10px 120px;
+  }
+  .itemInfo-container {
+    flex-direction: column;
+    padding: 0px;
+    gap: 20px;
+  }
+  .itemsInfo {
+    width: 80%;
+  }
+  .itemimgBox {
+    width: 90px;
+  }
+  .itembar {
+    width: 90% !important;
+  }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+  .itemInfo-container {
+    padding: 0px 10px;
+    gap: 20px;
+  }
+  .itemsInfo {
+    width: 80%;
+  }
+  .itemimgBox {
+    width: 86px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .details-container {
+    margin-top: 60px;
+    padding: 10px 80px;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .details-container {
+    margin-top: 60px;
+    padding: 10px 60px;
+  }
 }

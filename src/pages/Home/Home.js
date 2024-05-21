@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <div className="custhomediv">
       <Navbar />
+      
       <div className="home-container">
         <OfferCarousel title={"Best offers for you"} />
         <Carousel title={"Best Restaurants for you"} />

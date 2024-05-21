@@ -53,6 +53,7 @@ export default function ResturantItems() {
               <Accordion
                 key={index}
                 disabled={itemList.length === 0 ? true : false}
+                className={itemList.length === 0 ? "noitemavail" : "itemavail"}
               >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography>{category_name}</Typography>

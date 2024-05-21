@@ -10,20 +10,22 @@ export default function Footer() {
     <>
       <div className="footerdiv">
         <div className="footer-container">
-          <div className="menu-items">
-            <h4 className="footmenu">COMPANY</h4>
-            <p>About us</p>
-            <p>Careers</p>
-            <p>Terms & Conditions</p>
-          </div>
-          <div className="menu-items">
-            <h4 className="footmenu">CONTACT</h4>
-            <p>Help & Support</p>
-          </div>
-          <div className="menu-items">
-            <h4 className="footmenu">FOR RESTAURANTS</h4>
-            <p>Partner With Us</p>
-            <p>Register Restaurant</p>
+          <div className="footer-container-menu">
+            <div className="menu-items">
+              <h4 className="footmenu">COMPANY</h4>
+              <p>About us</p>
+              <p>Careers</p>
+              <p>Terms & Conditions</p>
+            </div>
+            <div className="menu-items">
+              <h4 className="footmenu">CONTACT</h4>
+              <p>Help & Support</p>
+            </div>
+            <div className="menu-items">
+              <h4 className="footmenu">FOR RESTAURANTS</h4>
+              <p>Partner With Us</p>
+              <p>Register Restaurant</p>
+            </div>
           </div>
           <div className="apkstore">
             <img src={appstore} alt="apple store icon" />

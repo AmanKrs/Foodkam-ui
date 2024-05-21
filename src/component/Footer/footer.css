@@ -9,15 +9,23 @@
 
 .footer-container {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.footer-container-menu {
+  display: flex;
+  width: 70%;
   justify-content: space-around;
 }
 .menu-items {
   margin-top: 30px;
 }
-.footmenu{
+.footmenu {
   color: #928f8f;
 }
 .apkstore {
+  width: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -46,7 +54,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
- 
 }
 .ftr-icon {
   display: flex;
@@ -63,4 +70,41 @@
   align-items: center;
   gap: 8px;
   line-height: 40px;
+}
+
+@media only screen and (max-width: 824px) {
+  .footer-container-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    margin: 10px;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .footer-container-menu {
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px;
+  }
+  .footer-container {
+    flex-direction: column;
+  }
+  .apkstore {
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .apkstore {
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .ftrdiv{
+     flex-direction: column;
+  }
 }

@@ -76,7 +76,13 @@ export default function CartItem(props) {
           <div className="cartInfo">
             <div className="itemsInfo">
               <p className="itemtype">
-                {item.itemtype.toLowerCase() === "veg" ? "🟩" : "🔴"}
+                <span
+                  className={
+                    item.itemtype.toLowerCase() === "veg"
+                      ? "veg-dot"
+                      : "nonveg-box"
+                  }
+                ></span>
                 <span className="itemname">{item.itemname}</span>
               </p>
               <p className="itemdetails">

@@ -5,10 +5,11 @@ import logo from "../../assets/logonew.png";
 import { LogOut } from "lucide-react";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { BadgePercent } from "lucide-react";
-
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 export default function Navbar() {
   const [custLogin, setCustLogin] = useState(false);
   const [resLogin, setResLogin] = useState(false);
+  const [sideBar, setSideBar] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,6 +35,9 @@ export default function Navbar() {
     }
   };
 
+  const handlenavmenu = () => {
+    setSideBar(!sideBar);
+  };
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       setCustLogin(true);
@@ -81,6 +85,10 @@ export default function Navbar() {
               <LogOut className="logout" />
             </li>
           </nav>
+          <div className={sideBar ? "nav-side" : "navBar"}>
+            <MenuRoundedIcon onClick={handlenavmenu} />
+            
+          </div>
         </div>
       )}
       {resLogin && (

@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: scroll;
   gap: 20px;
 }
 .carousel-btn-div {
@@ -33,8 +33,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden;
+  overflow: scroll;
   gap: 220px;
+}
+.carousel-list-offer::-webkit-scrollbar {
+  display: none;
+}
+.carousel-list::-webkit-scrollbar {
+  display: none;
 }
 .offerImg {
   width: 400px;

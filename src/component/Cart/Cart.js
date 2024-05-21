@@ -80,7 +80,7 @@ export default function Cart() {
                   })}
                   <hr className="total-divider"></hr>
                   <div className="cartInfo">
-                    <div className="itemsInfo">
+                    <div className="itemsInfoCart">
                       <h4>Total Amount</h4>
                     </div>
                     <h5>₹ {itemIncart?.totalCartAmount}.00</h5>
