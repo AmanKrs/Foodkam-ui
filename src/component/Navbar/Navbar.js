@@ -6,6 +6,7 @@ import { LogOut } from "lucide-react";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { BadgePercent } from "lucide-react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseIcon from "@mui/icons-material/Close";
 export default function Navbar() {
   const [custLogin, setCustLogin] = useState(false);
   const [resLogin, setResLogin] = useState(false);
@@ -86,8 +87,38 @@ export default function Navbar() {
             </li>
           </nav>
           <div className={sideBar ? "nav-side" : "navBar"}>
-            <MenuRoundedIcon onClick={handlenavmenu} />
-            
+            {sideBar && (
+              <div className="sidemenu">
+                <nav className="side-navbar">
+                  <li className="sideclose">
+                    <CloseIcon onClick={handlenavmenu} />
+                  </li>
+                  <li className="side-item">
+                    <BadgePercent />
+                    &nbsp; <span>Offers</span>
+                  </li>
+                  <li className="side-item" onClick={handleAccount}>
+                    Account
+                  </li>
+                  <li className="side-item" onClick={handleNavigatecart}>
+                    <LocalMallIcon size={30} color="primary" />
+                    &nbsp; Cart
+                  </li>
+                  <li className="side-item" onClick={handleuserLogout}>
+                    Logout &nbsp;
+                    <LogOut className="logout" />
+                  </li>
+                </nav>
+                {/* <div className="sideclose">
+                  <MenuRoundedIcon onClick={handlenavmenu} />
+                </div> */}
+              </div>
+            )}
+            {!sideBar && (
+              <>
+                <MenuRoundedIcon onClick={handlenavmenu} />
+              </>
+            )}
           </div>
         </div>
       )}
