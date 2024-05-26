@@ -55,3 +55,35 @@
   height: 150px;
   border-radius: 50%;
 }
+
+@media only screen and (max-width: 640px) {
+  .carousel-title {
+    font-size: 1.8rem;
+  }
+  .carousel-head {
+    padding-left: 35px;
+  }
+  .carousel-box {
+    width: 180px;
+  }
+  .carouselImg {
+    width: 80%;
+    height: 80%;
+  }
+  .carousel-list-offer {
+    gap: 150px;
+  }
+  .offerImg {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .carousel-head {
+    padding-left: 20px;
+  }
+  .carouselImg {
+    width: 70%;
+    height: 70%;
+  }
+}

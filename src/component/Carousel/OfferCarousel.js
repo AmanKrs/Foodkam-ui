@@ -24,7 +24,7 @@ export default function OfferCarousel(props) {
   return (
     <>
       <div className="custOffer">
-        <h1>{props.title}</h1>
+        <h1 className="carousel-title">{props.title}</h1>
         <div className="carousel-head">
           <div className="carousel-container">
             <div className="carousel-btn-div">

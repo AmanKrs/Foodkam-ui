@@ -3,33 +3,33 @@
   padding: 0px;
 }
 .home-container {
-  margin: 100px;
+  margin: 80px;
   margin-top: 100px;
   position: relative;
 }
 
 @media only screen and (max-width: 824px) {
   .home-container {
-    margin: 90px;
+    margin: 75px;
     margin-top: 100px;
   }
 }
 @media only screen and (min-width: 640px) and (max-width: 720px) {
   .home-container {
-    margin: 70px;
+    margin: 60px;
     margin-top: 100px;
   }
 }
 
 @media only screen and (max-width: 640px) {
   .home-container {
-    margin: 60px;
+    margin: 40px;
     margin-top: 100px;
   }
 }
 @media only screen and (max-width: 360px) {
   .home-container {
-    margin: 40px;
+    margin: 30px;
     margin-top: 100px;
   }
 }

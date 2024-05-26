@@ -39,14 +39,12 @@ export default function ResturantsCards() {
                 <div className="restitle">
                   <h3 className="resname">{elem.resName}</h3>
                 </div>
-                <div className="">
+                <div className="resdetails-container">
                   <div className="resdetails">
                     <p className="restyp">{elem.cuisine}</p>
                     <p className="restyp">{elem.restype}</p>
                   </div>
-                  <div className="resdetails">
-                    <p className="resloc">{elem.address}</p>
-                  </div>
+                  <p className="resloc">{elem.address}</p>
                 </div>
               </div>
             </div>

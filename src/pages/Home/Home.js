@@ -5,11 +5,11 @@ import ResturantsCards from "../../component/ResturantsCards/ResturantsCards";
 import OfferCarousel from "../../component/Carousel/OfferCarousel";
 
 export default function Home() {
-  
-  return (
+  console.log("home")
+  return(
     <div className="custhomediv">
       <Navbar />
-      
+
       <div className="home-container">
         <OfferCarousel title={"Best offers for you"} />
         <Carousel title={"Best Restaurants for you"} />

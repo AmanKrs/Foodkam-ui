@@ -75,7 +75,7 @@
 @media only screen and (max-width: 824px) {
   .footer-container-menu {
     display: grid;
-    grid-template-columns: repeat(2, 2fr);
+    grid-template-columns: repeat(3, 2fr);
     margin: 10px;
   }
 }
@@ -104,7 +104,11 @@
     justify-content: center;
     flex-direction: column;
   }
-  .ftrdiv{
-     flex-direction: column;
+  .ftrdiv {
+    flex-direction: column;
+  }
+
+  .footer-container-menu {
+    grid-template-columns: repeat(2, 2fr);
   }
 }
