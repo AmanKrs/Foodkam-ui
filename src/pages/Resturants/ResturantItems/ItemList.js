@@ -5,11 +5,13 @@ import axios from "axios";
 // import "../../../utils/interceptor";
 import { useDispatch, useSelector } from "react-redux";
 import { DelfromCart, AddToCart } from "../../../redux/Cart/action";
+import Loading from "../../../component/Loading/Loading";
 const apiurl = process.env.REACT_APP_API_URL;
 export default function ItemList(props) {
   const { item } = props;
   const dispatch = useDispatch();
   const quantity = useSelector((state) => state.cartDetails.addToCart);
+  const loading = useSelector((state) => state.cartDetails.loading);
   console.log(quantity);
   const [addItem, setaddItem] = useState(quantity);
 
@@ -138,7 +140,18 @@ export default function ItemList(props) {
                   >
                     -
                   </button>
-                  {addItem === 0 ? "ADD" : addItem}
+                  {addItem === 0 ? (
+                    "ADD"
+                  ) : loading ? (
+                    <Loading
+                      loadtype={"circular"}
+                      loading={true}
+                      size={15}
+                      thickness={4}
+                    />
+                  ) : (
+                    addItem
+                  )}
                   <button
                     className="countbtn"
                     onClick={() => {

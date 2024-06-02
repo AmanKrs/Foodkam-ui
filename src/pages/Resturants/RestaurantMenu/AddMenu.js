@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../../utils/resInterceptor";
 import "./addResMenu.css";
+
 const imgStorageurl = process.env.REACT_APP_Image_Storage;
 const apiurl = process.env.REACT_APP_API_URL;
 

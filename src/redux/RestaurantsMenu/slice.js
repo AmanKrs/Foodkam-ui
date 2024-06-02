@@ -5,6 +5,7 @@ const initialState = {
   restaurantData: {},
   menuData: [],
   loading: true,
+  loadingMenu: true,
   error: false,
 };
 
@@ -29,16 +30,16 @@ const RestaurantInfoSlice = createSlice({
     });
 
     builder.addCase(ResturantsMenu.fulfilled, (state, action) => {
-      state.loading = false;
+      state.loadingMenu = false;
       state.menuData = action.payload;
       console.log(action.payload);
     });
     builder.addCase(ResturantsMenu.pending, (state, action) => {
-      state.loading = true;
+      state.loadingMenu = true;
     });
 
     builder.addCase(ResturantsMenu.rejected, (state, action) => {
-      state.loading = false;
+      state.loadingMenu = false;
       state.error = true;
     });
   },

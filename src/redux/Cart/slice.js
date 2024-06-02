@@ -4,7 +4,7 @@ import { DelfromCart, AddToCart } from "./action";
 const initialState = {
   addToCart: 0,
   delfromCart:0,
-  loading: true,
+  loading: false,
   error: false,
 };
 
