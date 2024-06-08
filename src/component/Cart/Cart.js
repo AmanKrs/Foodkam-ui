@@ -86,9 +86,16 @@ export default function Cart() {
                     <h5>₹ {itemIncart?.totalCartAmount}.00</h5>
                   </div>
                 </div>
+
+                <div className="payment-btn">
+                  <button class="paymentbutton" data-text="Awesome">
+                    <span class="actual-text">&nbsp;Proceed to Pay&nbsp;</span>
+                  </button>
+                </div>
               </>
             )}
           </div>
+
           {/* <img src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" /> */}
         </div>
       </div>

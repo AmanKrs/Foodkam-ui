@@ -14,3 +14,16 @@
   display: inline-block;
   margin-right: 7px;
 }
+
+.loadingcards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.loadinginfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}

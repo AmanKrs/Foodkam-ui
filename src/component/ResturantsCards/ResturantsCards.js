@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RestaurantDetails } from "../../redux/Restaurants/action";
 import "react-loading-skeleton/dist/skeleton.css";
 import Loading from "../Loading/Loading";
+import LoadingCube from "../Loading/LoadingCube";
 
 export default function ResturantsCards() {
   const navigate = useNavigate();
@@ -25,7 +26,10 @@ export default function ResturantsCards() {
     <>
       <h2>Restaurants with online food delivery in Patna</h2>
       {loading ? (
-        <Loading loading={true} loadtype={"circular"} />
+        <div className="loadingcards">
+          {/* <Loading loading={true} loadtype={"circular"} /> */}
+          <LoadingCube />
+        </div>
       ) : (
         <div className="rescard">
           {restDetails?.map((elem, index) => {

@@ -63,8 +63,82 @@
   font-size: 1rem;
   padding: 0px 20px;
 }
-.total-divider{
+.total-divider {
   width: 90%;
   height: 1px;
   color: black;
+}
+/* css of payment button */
+
+.payment-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+/* === removing default button style ===*/
+/* .button {
+  margin: 0;
+  width: 60%;
+  height: 40px;
+  background: #499631;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+} */
+
+/* button styling */
+/* .button {
+  --border-right: 6px;
+  --text-stroke-color: rgb(255, 255, 255);
+  --animation-color: #f1f3f2;
+  --fs-size: 1.5em;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+   color: var(--animation-color);
+   -webkit-text-stroke: 1px var(--animation-color);
+} */
+.paymentbutton {
+  --bezier: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --edge-light: hsla(0, 0%, 50%, 0.8);
+  --text-light: rgba(255, 255, 255, 0.4);
+  --back-color: 115, 50%;
+  margin: 0;
+  width: 60%;
+  border: none;
+  cursor: pointer;
+  padding: 0.7em 1em;
+  border-radius: 0.5em;
+  min-height: 2.4em;
+  min-width: 3em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  line-height: 1;
+  font-weight: bold;
+  background: #499631;
+  color: hsla(0, 0%, 90%);
+  border: 0;
+  box-shadow: inset 0.4px 1px 4px var(--edge-light);
+  transition: all 0.1s var(--bezier);
+}
+
+.paymentbutton:active {
+  --text-light: rgba(255, 255, 255, 1);
+  background: #499631;
+  box-shadow: inset 0.4px 1px 8px var(--edge-light),
+    0px 0px 8px hsla(var(--back-color), 50%, 0.6);
+  text-shadow: 0px 0px 20px var(--text-light);
+  color: hsla(0, 0%, 100%, 1);
+  letter-spacing: 0.6em;
+  transform: scale(1);
 }

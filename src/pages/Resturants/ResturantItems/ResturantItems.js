@@ -37,21 +37,23 @@ export default function ResturantItems() {
       <Navbar />
       <div className="details-container">
         {loading ? (
-          <div className="resInfo">
+          <div className="loadinginfo">
             <Loading loadtype={"circular"} loading={true} />
           </div>
         ) : (
-          <div className="resInfo">
-            <div>
-              <h1>{restaurantData?.resName}</h1>
-              <p>📍{restaurantData?.address}</p>
+          <>
+            <div className="resInfo">
+              <div>
+                <h1>{restaurantData?.resName}</h1>
+                <p>📍{restaurantData?.address}</p>
+              </div>
+              <div className="ratingBox">
+                <p>4.1</p>
+                <hr className="ratesep" />
+                <p>5k rating</p>
+              </div>
             </div>
-            <div className="ratingBox">
-              <p>4.1</p>
-              <hr className="ratesep" />
-              <p>5k rating</p>
-            </div>
-          </div>
+          </>
         )}
 
         {loadingMenu ? (
