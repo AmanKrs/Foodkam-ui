@@ -24,25 +24,59 @@
 .carttohome {
   margin-bottom: 25px;
 }
+.itemsInfoCart {
+  width: 40%;
+  font-size: 1rem;
+  padding: 0px 20px;
+}
+.cartdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+}
+.cartItem-container {
+  margin-left: 10px;
+}
+
 .cartInfo {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0px;
-  /* padding: 0px 0px; */
-  gap: 20px;
+  gap: 10px;
+  width: 100%;
+}
+
+.cart-itemsInfo {
+  width: 60%;
+}
+
+.cart-itemtype {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.cart-itemname {
+  margin: 0px;
+  padding: 0px;
+}
+.cart-itemdetails {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.8rem;
+  margin-left: 10px;
 }
 
 .cartamountBox {
-  width: 50%;
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 20px;
 }
-.cartItem-container {
-  padding: 2px 40px;
-}
+
 .cartTotal-container {
   display: flex;
   align-items: center;
@@ -61,17 +95,7 @@
   color: green;
   font-weight: 500;
 }
-.cartdiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 10px;
-}
-.itemsInfoCart {
-  width: 40%;
-  font-size: 1rem;
-  padding: 0px 20px;
-}
+
 .total-divider {
   width: 90%;
   height: 1px;

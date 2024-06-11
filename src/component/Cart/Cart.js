@@ -75,7 +75,6 @@ export default function Cart() {
                         key={index}
                         item={elem.itemInfo}
                         itemQuantInCart={elem.itemQuantInCart}
-                        className="cartItem-container"
                       />
                     );
                   })}
@@ -86,12 +85,14 @@ export default function Cart() {
                     </div>
                     <h5>₹ {itemIncart?.totalCartAmount}.00</h5>
                   </div>
-                </div>
 
-                <div className="payment-btn">
-                  <button class="paymentbutton" data-text="Awesome">
-                    <span class="actual-text">&nbsp;Proceed to Pay&nbsp;</span>
-                  </button>
+                  <div className="payment-btn">
+                    <button class="paymentbutton" data-text="Awesome">
+                      <span class="actual-text">
+                        &nbsp;Proceed to Pay&nbsp;
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </>
             )}

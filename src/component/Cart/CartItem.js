@@ -69,80 +69,74 @@ export default function CartItem(props) {
   };
 
   return (
-    <>
-      <div>
-        <AccordionDetails>
-          <div className="cartInfo">
-            <div className="itemsInfo">
-              <p className="itemtype">
-                <span
-                  className={
-                    item.itemtype.toLowerCase() === "veg"
-                      ? "veg-dot"
-                      : "nonveg-box"
-                  }
-                ></span>
-                <span className="itemname">{item.itemname}</span>
+    <AccordionDetails className="cartItem-container">
+      <div className="cartInfo">
+        <div className="cart-itemsInfo">
+          <p className="cart-itemtype">
+            <span
+              className={
+                item.itemtype.toLowerCase() === "veg" ? "veg-dot" : "nonveg-box"
+              }
+            ></span>
+            <span className="cart-itemname">{item.itemname}</span>
+          </p>
+          <p className="cart-itemdetails">
+            {item.description}| ₹ {item.itemprice}
+          </p>
+        </div>
+        <div className="cartamountBox">
+          <div className="addedcart">
+            {!addItem ? (
+              <p
+                style={{
+                  margin: "0px",
+                  padding: "0px 25%",
+                }}
+                onClick={() => {
+                  handleadditem(item);
+                }}
+              >
+                ADD
               </p>
-              <p className="itemdetails">
-                {item.description}| ₹ {item.itemprice}
-              </p>
-            </div>
-            <div className="cartamountBox">
-              <div className="addedcart">
-                {!addItem ? (
-                  <p
-                    style={{
-                      margin: "0px",
-                      padding: "0px 25%",
-                    }}
-                    onClick={() => {
-                      handleadditem(item);
-                    }}
-                  >
-                    ADD
-                  </p>
+            ) : (
+              <>
+                <button
+                  className="countbtn"
+                  onClick={() => {
+                    handledelitem(item);
+                  }}
+                >
+                  -
+                </button>
+                {addItem === 0 ? (
+                  "ADD"
+                ) : loading ? (
+                  <Loading
+                    loadtype={"circular"}
+                    loading={true}
+                    size={15}
+                    thickness={4}
+                  />
                 ) : (
-                  <>
-                    <button
-                      className="countbtn"
-                      onClick={() => {
-                        handledelitem(item);
-                      }}
-                    >
-                      -
-                    </button>
-                    {addItem === 0 ? (
-                      "ADD"
-                    ) : loading ? (
-                      <Loading
-                        loadtype={"circular"}
-                        loading={true}
-                        size={15}
-                        thickness={4}
-                      />
-                    ) : (
-                      addItem
-                    )}
-                    <button
-                      className="countbtn"
-                      onClick={() => {
-                        handleadditem(item);
-                      }}
-                    >
-                      +
-                    </button>
-                  </>
+                  addItem
                 )}
-              </div>
-              <div className="totalprice-div">
-                <span>₹ </span>
-                <span>{totalItemPrice}</span>
-              </div>
-            </div>
+                <button
+                  className="countbtn"
+                  onClick={() => {
+                    handleadditem(item);
+                  }}
+                >
+                  +
+                </button>
+              </>
+            )}
           </div>
-        </AccordionDetails>
+          <div className="totalprice-div">
+            <span>₹ </span>
+            <span>{totalItemPrice}</span>
+          </div>
+        </div>
       </div>
-    </>
+    </AccordionDetails>
   );
 }
