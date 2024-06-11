@@ -75,11 +75,12 @@ export default function Cart() {
                         key={index}
                         item={elem.itemInfo}
                         itemQuantInCart={elem.itemQuantInCart}
+                        className="cartItem-container"
                       />
                     );
                   })}
                   <hr className="total-divider"></hr>
-                  <div className="cartInfo">
+                  <div className="cartTotal-container">
                     <div className="itemsInfoCart">
                       <h4>Total Amount</h4>
                     </div>

@@ -55,7 +55,7 @@
 
 .lnavbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   padding-right: 50px;
   gap: 50px;
@@ -98,9 +98,9 @@
   gap: 20px;
 }
 .sideclose {
- list-style: none;
- display: flex;
- justify-content: end;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 .side-item {
@@ -108,10 +108,9 @@
   display: flex;
   align-items: center;
   background-color: rgb(204, 203, 202);
- 
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 641px) {
   .navBar {
     display: none;
   }
@@ -133,7 +132,7 @@
   margin-top: 50px;
   align-items: center;
 } */
- .nav-side {
+  .nav-side {
     display: block;
     padding: 20px;
     font-size: 1rem;

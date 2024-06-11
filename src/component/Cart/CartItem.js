@@ -35,10 +35,7 @@ export default function CartItem(props) {
   };
 
   const getcountitem = async (item) => {
-    const resultcount = await axios.post(
-      `${apiurl}/cart/getItemQuant`,
-      item
-    );
+    const resultcount = await axios.post(`${apiurl}/cart/getItemQuant`, item);
 
     let itemcountinCart = resultcount.data?.itemInCart[0]?.quant;
     if (typeof itemcountinCart == "number") {
@@ -138,7 +135,10 @@ export default function CartItem(props) {
                   </>
                 )}
               </div>
-              <div>₹ {totalItemPrice}</div>
+              <div className="totalprice-div">
+                <span>₹ </span>
+                <span>{totalItemPrice}</span>
+              </div>
             </div>
           </div>
         </AccordionDetails>

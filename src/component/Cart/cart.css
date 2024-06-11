@@ -27,18 +27,27 @@
 .cartInfo {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 0px;
-  padding: 0px 20px;
-  gap: 40px;
+  /* padding: 0px 0px; */
+  gap: 20px;
 }
 
 .cartamountBox {
-  width: 35%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  gap: 10px;
+  gap: 20px;
+}
+.cartItem-container {
+  padding: 2px 40px;
+}
+.cartTotal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 60px;
 }
 .addedcart {
   background-color: #fff;
@@ -55,7 +64,7 @@
 .cartdiv {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 10px;
 }
 .itemsInfoCart {
@@ -68,6 +77,12 @@
   height: 1px;
   color: black;
 }
+
+.totalprice-div {
+  display: flex;
+  gap: 4px;
+}
+
 /* css of payment button */
 
 .payment-btn {
@@ -77,39 +92,13 @@
   margin: 20px auto;
 }
 
-/* === removing default button style ===*/
-/* .button {
-  margin: 0;
-  width: 60%;
-  height: 40px;
-  background: #499631;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-} */
-
-/* button styling */
-/* .button {
-  --border-right: 6px;
-  --text-stroke-color: rgb(255, 255, 255);
-  --animation-color: #f1f3f2;
-  --fs-size: 1.5em;
-  letter-spacing: 4px;
-  text-decoration: none;
-  font-size: var(--fs-size);
-  font-family: "Arial";
-  position: relative;
-  text-transform: uppercase;
-   color: var(--animation-color);
-   -webkit-text-stroke: 1px var(--animation-color);
-} */
 .paymentbutton {
   --bezier: cubic-bezier(0.22, 0.61, 0.36, 1);
   --edge-light: hsla(0, 0%, 50%, 0.8);
   --text-light: rgba(255, 255, 255, 0.4);
   --back-color: 115, 50%;
   margin: 0;
-  width: 60%;
+  /* width: 60%; */
   border: none;
   cursor: pointer;
   padding: 0.7em 1em;
@@ -121,7 +110,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5em;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   letter-spacing: 0.5em;
   line-height: 1;
   font-weight: bold;
