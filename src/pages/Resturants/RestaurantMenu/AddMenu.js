@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import "../../../utils/resInterceptor";
 import "./addResMenu.css";
 
@@ -11,6 +13,17 @@ export default function AddMenu() {
   const [mediaSize, setMediaSize] = useState(false);
   const [itemPicUrl, setItemPicUrl] = useState();
   const [resDP, setResDP] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [snackMsg, setSnackMsg] = useState();
+  const [severityMsg, setSeverityMsg] = useState();
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleMenuFormdata = (e) => {
     setMenuData((prev) => ({
@@ -19,7 +32,6 @@ export default function AddMenu() {
     }));
   };
   const handleItemPicdata = (e) => {
-    console.log(e.target.files[0].type);
     if (
       e.target.files[0].type === "image/jpeg" ||
       e.target.files[0].type === "image/png"
@@ -34,7 +46,7 @@ export default function AddMenu() {
       })
         .then((res) => res.json())
         .then((itemPicData) => {
-          if (itemPicData.status === 200) {
+          if (itemPicData.type === "upload") {
             setResDP(true);
           }
           setItemPicUrl(itemPicData.secure_url.toString());
@@ -43,7 +55,9 @@ export default function AddMenu() {
           console.log(err);
         });
     } else {
-      console.log("pic messg");
+      setOpen(true);
+      setSnackMsg("Invalid Format");
+      setSeverityMsg("error");
     }
 
     if (e.target.files[0].size > 10485760) {
@@ -51,11 +65,14 @@ export default function AddMenu() {
     }
   };
   const handlePicUpload = (e) => {
-    console.log(itemPicUrl);
     setMenuData((prev) => ({
       ...prev,
       [e.target.name]: itemPicUrl,
     }));
+
+    setOpen(true);
+    setSeverityMsg("success");
+    setSnackMsg("Profile Picture Uploaded");
   };
 
   const handleAddItem = async () => {
@@ -179,6 +196,16 @@ export default function AddMenu() {
           </input> */}
         </div>
       </form>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert
+          severity={severityMsg}
+          sx={{ width: "100%" }}
+          onClose={handleClose}
+          variant="filled"
+        >
+          {snackMsg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

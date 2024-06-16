@@ -1,6 +1,5 @@
 .res-pro-container {
   box-sizing: border-box;
-  margin: 0px;
   width: 100%;
 }
 
@@ -120,7 +119,9 @@ h3 {
 .MuiTableCell-root {
   color: #fff !important;
 }
-
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed  {
+    color: #eba148 !important;
+}
 @media only screen and (max-width: 1100px) {
   .res-form-inputs {
     flex-direction: column;

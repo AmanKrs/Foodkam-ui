@@ -1,15 +1,27 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import "./addRestaurant.css";
+
 const imgStorageurl = process.env.REACT_APP_Image_Storage;
 
 export default function RestaurantInfo(props) {
   const { setResData } = props;
-  const [resDP, setResDP] = useState(true);
+  const [resDP, setResDP] = useState(false);
   const [mediaSize, setMediaSize] = useState(false);
   const [itemPicUrl, setItemPicUrl] = useState();
+  const [open, setOpen] = useState(false);
+  const [snackMsg, setSnackMsg] = useState();
+  const [severityMsg, setSeverityMsg] = useState();
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleItemPicdata = (e) => {
-    console.log(e.target.files[0].type);
     if (
       e.target.files[0].type === "image/jpeg" ||
       e.target.files[0].type === "image/png"
@@ -24,8 +36,7 @@ export default function RestaurantInfo(props) {
       })
         .then((res) => res.json())
         .then((itemPicData) => {
-          console.log(itemPicData);
-          if (itemPicData.status === 200) {
+          if (itemPicData.type === "upload") {
             setResDP(true);
           }
 
@@ -35,7 +46,9 @@ export default function RestaurantInfo(props) {
           console.log(err);
         });
     } else {
-      console.log("pic messg");
+      setOpen(true);
+      setSnackMsg("Invalid Format");
+      setSeverityMsg("error");
     }
 
     if (e.target.files[0].size > 10485760) {
@@ -43,11 +56,13 @@ export default function RestaurantInfo(props) {
     }
   };
   const handlePicUpload = (e) => {
-    console.log(itemPicUrl);
     setResData((prev) => ({
       ...prev,
       [e.target.name]: itemPicUrl,
     }));
+    setOpen(true);
+    setSeverityMsg("success");
+    setSnackMsg("Profile Picture Uploaded");
   };
   const handleProductFormdata = (e) => {
     setResData((prev) => ({
@@ -66,6 +81,8 @@ export default function RestaurantInfo(props) {
             className="res-input-text"
             type="text"
             name="resName"
+            required
+            placeholder="Restaurant Name"
             onChange={handleProductFormdata}
           ></input>
         </div>
@@ -75,6 +92,7 @@ export default function RestaurantInfo(props) {
             className="res-input-text"
             name="address"
             type="text"
+            placeholder="Address"
             onChange={handleProductFormdata}
           ></input>
         </div>
@@ -108,6 +126,7 @@ export default function RestaurantInfo(props) {
             className="res-input-text"
             type="password"
             name="password"
+            placeholder="Enter your Password"
             onChange={handleProductFormdata}
           ></input>
         </div>
@@ -121,7 +140,7 @@ export default function RestaurantInfo(props) {
           ></input>
           <button
             name="resprofilepic"
-            className="upload-itempic-btn"
+            className={resDP ? "upload-itempic-btn" : "additembtn-disable"}
             onClick={handlePicUpload}
             disabled={resDP ? false : true}
           >
@@ -129,6 +148,16 @@ export default function RestaurantInfo(props) {
           </button>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert
+          severity={severityMsg}
+          sx={{ width: "100%" }}
+          onClose={handleClose}
+          variant="filled"
+        >
+          {snackMsg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

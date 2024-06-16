@@ -35,17 +35,26 @@
 }
 
 .sidenav-menu {
-  background-color: aqua;
+  background-color: #eba148;
   padding: 10px;
   border-radius: 5px;
   margin: 15px 50px;
   font-size: 1.2rem;
   cursor: pointer;
+  width: 200px;
+  text-align: center;
+  color: #fff;
 }
 a {
   text-decoration: none;
 }
+@media only screen and (min-width: 840px) {
 
+  .sidenav-menu {
+    width: 100px;
+  }
+
+}
 @media only screen and (max-width: 840px) {
   .res-profile-container {
     display: flex;
@@ -77,11 +86,12 @@ a {
   }
 
   .sidenav-menu {
-    background-color: aqua;
+    background-color: #eba148;
     padding: 10px;
     border-radius: 5px;
     margin: 5px 10px 10px 10px;
     padding: 10px;
+    width: auto;
   }
   .resprofile-outlet-container {
     margin-top: 10px;
