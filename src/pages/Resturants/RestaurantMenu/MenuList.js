@@ -85,8 +85,8 @@ export default function MenuList() {
 
   return (
     <div>
-      <h3 style={{ color: "#6e39cb" }}>Menu List</h3>
-      <div style={{ padding:"20px" }}>
+      <h3 style={{ color: "#eba148" }}>Menu List</h3>
+      <div style={{ padding: "20px" }}>
         {loading ? (
           <Loading />
         ) : (

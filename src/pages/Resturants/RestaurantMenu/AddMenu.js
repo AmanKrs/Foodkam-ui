@@ -84,7 +84,7 @@ export default function AddMenu() {
   };
   return (
     <div>
-      <h3>Restaurant Menu</h3>
+      <h3 style={{ color: "#eba148" }}>Restaurant Menu</h3>
       <form className="input-container" onSubmit={handleAddItem}>
         <div className="p-form-inputs">
           <div>
