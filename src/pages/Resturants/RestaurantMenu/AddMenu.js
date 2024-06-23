@@ -9,7 +9,15 @@ const imgStorageurl = process.env.REACT_APP_Image_Storage;
 const apiurl = process.env.REACT_APP_API_URL;
 
 export default function AddMenu() {
-  const [menuData, setMenuData] = useState();
+  const [menuData, setMenuData] = useState({
+    itemname: "",
+    quantity: "",
+    category: "",
+    description: "",
+    itemtype: "",
+    itemprice: "",
+    itempic: "",
+  });
   const [mediaSize, setMediaSize] = useState(false);
   const [itemPicUrl, setItemPicUrl] = useState();
   const [resDP, setResDP] = useState(false);
@@ -65,6 +73,7 @@ export default function AddMenu() {
     }
   };
   const handlePicUpload = (e) => {
+    e.preventDefault();
     setMenuData((prev) => ({
       ...prev,
       [e.target.name]: itemPicUrl,
@@ -75,12 +84,26 @@ export default function AddMenu() {
     setSnackMsg("Profile Picture Uploaded");
   };
 
-  const handleAddItem = async () => {
+  const handleAddItem = async (e) => {
+    e.preventDefault();
     const menuItemData = await axios.post(
       `${apiurl}/restaurant/addmenu`,
       menuData
     );
-    console.log(menuItemData);
+
+    setOpen(true);
+    setSeverityMsg("success");
+    setSnackMsg("Item Added");
+    setMenuData({
+      itemname: "",
+      quantity: "",
+      category: "",
+      description: "",
+      itemtype: "",
+      itemprice: "",
+      itempic: "",
+    });
+    setResDP(false);
   };
   return (
     <div>
@@ -93,6 +116,7 @@ export default function AddMenu() {
               className="p-input-text"
               type="text"
               name="itemname"
+              value={menuData.itemname}
               required
               onChange={handleMenuFormdata}
             ></input>
@@ -103,6 +127,7 @@ export default function AddMenu() {
               className="p-select-text"
               type="number"
               name="quantity"
+              value={menuData.quantity}
               onChange={handleMenuFormdata}
               required
             ></input>
@@ -114,6 +139,7 @@ export default function AddMenu() {
             <select
               className="p-select-text"
               name="category"
+              value={menuData.category}
               required
               onChange={handleMenuFormdata}
             >
@@ -134,6 +160,7 @@ export default function AddMenu() {
               className="p-input-text"
               type="text"
               name="description"
+              value={menuData.description}
               required
               onChange={handleMenuFormdata}
             ></input>
@@ -145,6 +172,7 @@ export default function AddMenu() {
             <select
               className="p-select-text"
               name="itemtype"
+              value={menuData.itemtype}
               required
               onChange={handleMenuFormdata}
             >
@@ -160,6 +188,7 @@ export default function AddMenu() {
               className="p-input-text"
               type="number"
               name="itemprice"
+              value={menuData.itemprice}
               required
               onChange={handleMenuFormdata}
             ></input>
@@ -189,7 +218,7 @@ export default function AddMenu() {
           <input
             type="submit"
             value="Add item"
-            className={resDP ? "additembtn" : "additembtn-disable"}
+            className={resDP ? "paymentbutton" : "additembtn-disable"}
             disabled={resDP ? false : true}
           />
           {/* Add Item onClick={handleAddItem}

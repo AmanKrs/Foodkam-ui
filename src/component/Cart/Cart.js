@@ -87,8 +87,8 @@ export default function Cart() {
                   </div>
 
                   <div className="payment-btn">
-                    <button class="paymentbutton" data-text="Awesome">
-                      <span class="actual-text">
+                    <button className="paymentbutton" data-text="Awesome">
+                      <span className="actual-text">
                         &nbsp;Proceed to Pay&nbsp;
                       </span>
                     </button>
