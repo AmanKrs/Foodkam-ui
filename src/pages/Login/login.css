@@ -3,7 +3,11 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  
+  background-image: url("https://hungerbay.com/assets/images/b6.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .authcontainer {
   width: max-content;
@@ -75,13 +79,13 @@
   border: none;
 }
 
-.otpvalue{
+.otpvalue {
   width: 60%;
   height: 30px;
   border-radius: 5px;
   border: none;
 }
-.otplabel{
+.otplabel {
   margin: 0px;
   padding: 0px;
   font-size: 16px;

@@ -81,7 +81,7 @@ export default function AddMenu() {
 
     setOpen(true);
     setSeverityMsg("success");
-    setSnackMsg("Profile Picture Uploaded");
+    setSnackMsg("Item Picture Uploaded");
   };
 
   const handleAddItem = async (e) => {

@@ -10,8 +10,9 @@ import RestaurantProfile from "../../pages/Resturants/RestaurantProfile/Restaura
 import EditResturantDetails from "../../pages/Resturants/EditResturantDetails/EditResturantDetails";
 import AddMenu from "../../pages/Resturants/RestaurantMenu/AddMenu";
 import MenuList from "../../pages/Resturants/RestaurantMenu/MenuList";
-import UserProfile from "../../pages/UserProfile/UserProfile";
+import UserProfile from "../../pages/ProfilePage/UserProfile";
 import Cart from "../Cart/Cart";
+import RestaurantUserProfile from "../../pages/ProfilePage/RestaurantUserProfile";
 
 export default function Content() {
   return (
@@ -39,7 +40,7 @@ export default function Content() {
             ></Route>
             <Route
               path="/partner/profile/:id"
-              element={<EditResturantDetails />}
+              element={<RestaurantUserProfile />}
             ></Route>
           </Route>
         </Route>

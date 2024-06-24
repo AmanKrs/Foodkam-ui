@@ -3,7 +3,8 @@ import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import "./login.css";
-
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 const apiurl = process.env.REACT_APP_API_URL;
 
 export default function Login() {
@@ -11,22 +12,30 @@ export default function Login() {
   const [resLogin, setResLogin] = useState(false);
   const [verifyOtp, setVerifyOtp] = useState(false);
   const [loginFormData, setLoginFormData] = useState();
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [snackMsg, setSnackMsg] = useState();
+  const [resDP, setResDP] = useState(false);
+  const [severityMsg, setSeverityMsg] = useState();
 
+  const navigate = useNavigate();
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   const handleCustLogin = async () => {
-    console.log(loginFormData);
     try {
-      const result = await axios.post(
-        `${apiurl}/user/login`,
-        loginFormData
-      );
+      const result = await axios.post(`${apiurl}/user/login`, loginFormData);
       if (result.status === 200) {
         localStorage.setItem("token", result.data.token);
         navigate("/");
         // window.location.reload();
       }
     } catch (e) {
-      console.log(e);
+      setOpen(true);
+      setSeverityMsg("error");
+      setSnackMsg(e.response.data.msg);
     }
   };
   const handleVerifyOtp = async () => {
@@ -44,17 +53,16 @@ export default function Login() {
 
   const handleResLogin = async () => {
     try {
-      const result = await axios.post(
-        `${apiurl}/partner/login`,
-        loginFormData
-      );
+      const result = await axios.post(`${apiurl}/partner/login`, loginFormData);
       if (result.status === 200) {
         localStorage.setItem("restoken", result.data.token);
         navigate("/partner/profile");
         // window.location.reload();
       }
     } catch (e) {
-      console.log(e);
+      setOpen(true);
+      setSeverityMsg("error");
+      setSnackMsg(e.response.data.msg);
     }
   };
   const handleCustButton = () => {
@@ -84,6 +92,22 @@ export default function Login() {
     <div className="authdiv">
       <div className="authcontainer">
         <div className="loginbox">
+          <Snackbar
+            open={open}
+            autoHideDuration={5000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            // key={vertical + horizontal}
+          >
+            <Alert
+              severity={severityMsg}
+              sx={{ width: "100%" }}
+              onClose={handleClose}
+              variant="filled"
+            >
+              {snackMsg}
+            </Alert>
+          </Snackbar>
           <div className="authbtn-container">
             <div
               className={custLogin ? "authbtn authbtntrue" : "authbtn"}
@@ -112,7 +136,7 @@ export default function Login() {
               <>
                 <label className="otplabel">OTP Verification</label>
                 <input
-                  type="text"
+                  type="password"
                   className="otpvalue"
                   placeholder="Enter OTP"
                   name="password"
@@ -123,7 +147,7 @@ export default function Login() {
             )}
             {custLogin && !verifyOtp && (
               <button onClick={handleVerifyOtp} className="loginidbtn">
-                Send One Time Password
+                {/* Send One Time Password */}Next
               </button>
             )}
             {custLogin && verifyOtp && (
@@ -133,7 +157,7 @@ export default function Login() {
             )}
             {resLogin && !verifyOtp && (
               <button onClick={handleVerifyOtp} className="loginidbtn">
-                Send One Time Password
+                {/* Send One Time Password */}Next
               </button>
             )}
             {resLogin && verifyOtp && (
