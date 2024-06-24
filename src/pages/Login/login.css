@@ -60,6 +60,13 @@
   padding: 30px;
   gap: 10px;
 }
+.logindivform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
 .logindivider {
   width: 100%;
   text-align: center;

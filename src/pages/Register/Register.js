@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 const apiurl = process.env.REACT_APP_API_URL;
 
 export default function Register() {
   const [userRegFormData, setUserRegFormData] = useState();
+  const [open, setOpen] = useState(false);
+  const [snackMsg, setSnackMsg] = useState();
+  const [severityMsg, setSeverityMsg] = useState();
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   const navigate = useNavigate();
 
   const handleRegForm = (event) => {
@@ -26,7 +37,9 @@ export default function Register() {
         window.location.reload();
       }
     } catch (e) {
-      console.log(e);
+      setOpen(true);
+      setSeverityMsg("error");
+      setSnackMsg(e.response.data.msg);
     }
   };
 
@@ -34,6 +47,22 @@ export default function Register() {
     <div className="authdiv">
       <div className="authcontainer">
         <div className="loginbox">
+          <Snackbar
+            open={open}
+            autoHideDuration={5000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            // key={vertical + horizontal}
+          >
+            <Alert
+              severity={severityMsg}
+              sx={{ width: "100%" }}
+              onClose={handleClose}
+              variant="filled"
+            >
+              {snackMsg}
+            </Alert>
+          </Snackbar>
           <div className="authbtn-container">
             <div className="authbtntrue authbtn">
               <span>user registration </span>
@@ -41,12 +70,13 @@ export default function Register() {
           </div>
 
           <div className="logindiv">
-            <form onSubmit={handleCustLogin}>
+            <form className="logindivform" onSubmit={handleCustLogin}>
               <input
                 type="text"
                 className="loginid"
                 placeholder="FirstName"
                 name="firstName"
+                required
                 onChange={handleRegForm}
               />
               <input
@@ -54,6 +84,7 @@ export default function Register() {
                 className="loginid"
                 placeholder="LastName"
                 name="lastName"
+                required
                 onChange={handleRegForm}
               />
               <input
@@ -61,6 +92,7 @@ export default function Register() {
                 className="loginid"
                 placeholder="Enter your email"
                 name="email"
+                required
                 onChange={handleRegForm}
               />
               <input
@@ -68,6 +100,7 @@ export default function Register() {
                 className="loginid"
                 placeholder="Phone Number"
                 name="phone"
+                required
                 onChange={handleRegForm}
               />
               <input
@@ -75,14 +108,10 @@ export default function Register() {
                 className="loginid"
                 placeholder="Password"
                 name="password"
+                required
                 onChange={handleRegForm}
               />
-              <input
-                type="submit"
-                value="Sign-up"
-                className="loginidbtn"
-                
-              />
+              <input type="submit" value="Sign-up" className="loginidbtn" />
             </form>
             <NavLink
               to="/login"

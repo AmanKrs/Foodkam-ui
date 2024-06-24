@@ -14,7 +14,6 @@ export default function Login() {
   const [loginFormData, setLoginFormData] = useState();
   const [open, setOpen] = useState(false);
   const [snackMsg, setSnackMsg] = useState();
-  const [resDP, setResDP] = useState(false);
   const [severityMsg, setSeverityMsg] = useState();
 
   const navigate = useNavigate();
