@@ -41,7 +41,7 @@ export default function Register() {
           </div>
 
           <div className="logindiv">
-            <form className="input-container" onSubmit={handleCustLogin}>
+            <form onSubmit={handleCustLogin}>
               <input
                 type="text"
                 className="loginid"
