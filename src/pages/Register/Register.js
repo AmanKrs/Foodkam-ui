@@ -41,45 +41,49 @@ export default function Register() {
           </div>
 
           <div className="logindiv">
-            <input
-              type="text"
-              className="loginid"
-              placeholder="FirstName"
-              name="firstName"
-              onChange={handleRegForm}
-            />
-            <input
-              type="text"
-              className="loginid"
-              placeholder="LastName"
-              name="lastName"
-              onChange={handleRegForm}
-            />
-            <input
-              type="email"
-              className="loginid"
-              placeholder="Enter your email"
-              name="email"
-              onChange={handleRegForm}
-            />
-            <input
-              type="tel"
-              className="loginid"
-              placeholder="Phone Number"
-              name="phone"
-              onChange={handleRegForm}
-            />
-            <input
-              type="password"
-              className="loginid"
-              placeholder="Password"
-              name="password"
-              onChange={handleRegForm}
-            />
-            <button onClick={handleCustLogin} className="loginidbtn">
-              sign-up
-            </button>
-
+            <form className="input-container" onSubmit={handleCustLogin}>
+              <input
+                type="text"
+                className="loginid"
+                placeholder="FirstName"
+                name="firstName"
+                onChange={handleRegForm}
+              />
+              <input
+                type="text"
+                className="loginid"
+                placeholder="LastName"
+                name="lastName"
+                onChange={handleRegForm}
+              />
+              <input
+                type="email"
+                className="loginid"
+                placeholder="Enter your email"
+                name="email"
+                onChange={handleRegForm}
+              />
+              <input
+                type="tel"
+                className="loginid"
+                placeholder="Phone Number"
+                name="phone"
+                onChange={handleRegForm}
+              />
+              <input
+                type="password"
+                className="loginid"
+                placeholder="Password"
+                name="password"
+                onChange={handleRegForm}
+              />
+              <input
+                type="submit"
+                value="Sign-up"
+                className="loginidbtn"
+                disabled={resDP ? false : true}
+              />
+            </form>
             <NavLink
               to="/login"
               style={({ isActive, isPending }) => {
