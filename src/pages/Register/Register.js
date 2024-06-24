@@ -81,7 +81,7 @@ export default function Register() {
                 type="submit"
                 value="Sign-up"
                 className="loginidbtn"
-                disabled={resDP ? false : true}
+                
               />
             </form>
             <NavLink
