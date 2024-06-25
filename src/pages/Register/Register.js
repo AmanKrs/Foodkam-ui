@@ -26,7 +26,8 @@ export default function Register() {
     }));
   };
 
-  const handleCustLogin = async () => {
+  const handleCustLogin = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.post(`${apiurl}/user/signup`, userRegFormData);
       console.log(userRegFormData);
@@ -37,6 +38,7 @@ export default function Register() {
         window.location.reload();
       }
     } catch (e) {
+      console.log(e);
       setOpen(true);
       setSeverityMsg("error");
       setSnackMsg(e.response.data.msg);

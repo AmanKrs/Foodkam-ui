@@ -15,7 +15,6 @@ import axios from "axios";
 
 const apiurl = process.env.REACT_APP_API_URL;
 
-
 const steps = ["Restaurant Information", "Restaurant Time and Type"];
 
 export default function AddResturant() {
@@ -32,6 +31,16 @@ export default function AddResturant() {
     cuisine: "",
   });
 
+  const [open, setOpen] = useState(false);
+  const [snackMsg, setSnackMsg] = useState();
+  const [severityMsg, setSeverityMsg] = useState();
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -45,22 +54,22 @@ export default function AddResturant() {
         resData.phone == ""
       ) {
         alert("Please enter the required Details");
-      }else{
-         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      } else {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
     }
-   if (activeStep === 1) {
-     if (
-       resData.resopentime == "" ||
-       resData.resclosetime == "" ||
-       resData.restype == "" ||
-       resData.cuisine == "" 
-     ) {
-       alert("Please enter the required Details");
-     } else {
-       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-     }
-   }
+    if (activeStep === 1) {
+      if (
+        resData.resopentime == "" ||
+        resData.resclosetime == "" ||
+        resData.restype == "" ||
+        resData.cuisine == ""
+      ) {
+        alert("Please enter the required Details");
+      } else {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
+    }
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -85,17 +94,29 @@ export default function AddResturant() {
     try {
       const result = await axios.post(`${apiurl}/partner/register`, resData);
       console.log(result);
-      navigate("/login");
-    } catch (error) {
-      console.log("error");
+      setOpen(true);
+      setSeverityMsg("success");
+
+      if (result.status === 200) {
+        setSnackMsg(result.data.msg.data.msg);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
+    } catch (e) {
+      console.log("error", e);
+      setOpen(true);
+      setSeverityMsg("error");
+
+      if (e.response.status === 403) {
+        setSnackMsg(e.response.data.msg);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
     }
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-  };
   const handleResSignIn = () => {
     navigate("/login");
   };
@@ -146,16 +167,19 @@ export default function AddResturant() {
               </Box>
 
               <Snackbar
-                open={true}
-                autoHideDuration={6000}
+                open={open}
+                autoHideDuration={5000}
                 onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                // key={vertical + horizontal}
               >
                 <Alert
-                  onClose={handleClose}
-                  severity={"success"}
+                  severity={severityMsg}
                   sx={{ width: "100%" }}
+                  onClose={handleClose}
+                  variant="filled"
                 >
-                  Hello
+                  {snackMsg}
                 </Alert>
               </Snackbar>
             </Fragment>
