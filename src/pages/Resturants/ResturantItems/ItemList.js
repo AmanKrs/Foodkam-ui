@@ -108,12 +108,7 @@ export default function ItemList(props) {
               {item.itemname}
             </p>
             <span>₹{item.itemprice}</span>
-            <p className="itemdetails">
-              {item.description}
-              Serves 1 | Battered fish simmered in soy sauce with chillies,
-              capcicum and onion. 8 pc. Basa/ bombay vetki depending on
-              availability.
-            </p>
+            <p className="itemdetails">Serves 1 | {item.description}</p>
           </div>
           <div className="itemimgBox">
             <img src={item.itempic} className="itemImg" alt="menuitmei" />

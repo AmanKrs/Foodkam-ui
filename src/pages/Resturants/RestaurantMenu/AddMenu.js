@@ -82,6 +82,9 @@ export default function AddMenu() {
     setOpen(true);
     setSeverityMsg("success");
     setSnackMsg("Item Picture Uploaded");
+    if(menuData.itempic==""){
+      setResDP(false);
+    }
   };
 
   const handleAddItem = async (e) => {
