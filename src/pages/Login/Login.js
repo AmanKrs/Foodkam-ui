@@ -168,12 +168,12 @@ export default function Login() {
             <p className="logindivider">
               <span>OR</span>
             </p>
-            <GoogleLogin
+            {/* <GoogleLogin
               onSuccess={(credentialResponse) => sendToken(credentialResponse)}
               onError={() => {
                 console.log("Login Failed");
               }}
-            />
+            /> */}
             <div>
               {custLogin && (
                 <NavLink

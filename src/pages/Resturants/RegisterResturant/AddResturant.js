@@ -12,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import RegisteredRestaurant from "./RegisteredRestaurant";
 
 const apiurl = process.env.REACT_APP_API_URL;
 
@@ -72,6 +73,17 @@ export default function AddResturant() {
     }
   };
   const handleBack = () => {
+    setResData({
+      resName: "",
+      address: "",
+      resowner: "",
+      phone: "",
+      password: "",
+      resopentime: "",
+      resclosetime: "",
+      restype: "",
+      cuisine: "",
+    });
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
@@ -98,7 +110,7 @@ export default function AddResturant() {
       setSeverityMsg("success");
 
       if (result.status === 200) {
-        setSnackMsg(result.data.msg.data.msg);
+        setSnackMsg(result.data.msg);
         setTimeout(() => {
           navigate("/login");
         }, 1000);
@@ -107,8 +119,9 @@ export default function AddResturant() {
       console.log("error", e);
       setOpen(true);
       setSeverityMsg("error");
+      setSnackMsg(e.response.data.msg);
 
-      if (e.response.status === 403) {
+      if (e.response?.status === 403) {
         setSnackMsg(e.response.data.msg);
         setTimeout(() => {
           navigate("/login");
@@ -158,11 +171,11 @@ export default function AddResturant() {
           {activeStep === steps.length ? (
             <Fragment>
               <Typography sx={{ mt: 2, mb: 1 }}>
-                All steps completed - We&apos;re good to go...😍
+                <RegisteredRestaurant formData={resData} />
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Box sx={{ flex: "1 1 auto" }} />
-
+                <Button onClick={handleReset}>Reset</Button>
                 <Button onClick={handleFinish}>Submit</Button>
               </Box>
 
