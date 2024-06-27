@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import "./login.css";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginCustomer, LoginRestaurant } from "../../redux/Login/action";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-const apiurl = process.env.REACT_APP_API_URL;
 
 export default function Login() {
   const [custLogin, setCustLogin] = useState(true);
-  const [resLogin, setResLogin] = useState(false);
   const [verifyOtp, setVerifyOtp] = useState(false);
   const [loginFormData, setLoginFormData] = useState();
   const [open, setOpen] = useState(false);
   const [snackMsg, setSnackMsg] = useState();
   const [severityMsg, setSeverityMsg] = useState();
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -24,18 +25,23 @@ export default function Login() {
     setOpen(false);
   };
   const handleCustLogin = async () => {
-    try {
-      const result = await axios.post(`${apiurl}/user/login`, loginFormData);
-      if (result.status === 200) {
-        localStorage.setItem("token", result.data.token);
-        navigate("/");
-        // window.location.reload();
-      }
-    } catch (e) {
-      setOpen(true);
-      setSeverityMsg("error");
-      setSnackMsg(e.response.data.msg);
-    }
+    let payload = loginFormData;
+    dispatch(
+      LoginCustomer({
+        payload,
+        cb: (result) => {
+          if (result.status === 200) {
+            localStorage.setItem("token", result.data.token);
+            navigate("/");
+          } else {
+            console.log("first", result);
+            setOpen(true);
+            setSeverityMsg("error");
+            setSnackMsg(result.response.data.msg);
+          }
+        },
+      })
+    );
   };
   const handleVerifyOtp = async () => {
     setVerifyOtp(!verifyOtp);
@@ -51,30 +57,31 @@ export default function Login() {
   };
 
   const handleResLogin = async () => {
-    try {
-      const result = await axios.post(`${apiurl}/partner/login`, loginFormData);
-      if (result.status === 200) {
-        localStorage.setItem("restoken", result.data.token);
-        navigate("/partner/profile");
-        // window.location.reload();
-      }
-    } catch (e) {
-      setOpen(true);
-      setSeverityMsg("error");
-      setSnackMsg(e.response.data.msg);
-    }
+    let payload = loginFormData;
+    dispatch(
+      LoginRestaurant({
+        payload,
+        cb: (result) => {
+          if (result.status === 200) {
+            localStorage.setItem("restoken", result.data.token);
+            navigate("/partner/profile");
+          } else {
+            setOpen(true);
+            setSeverityMsg("error");
+            setSnackMsg(result.response.data.msg);
+          }
+        },
+      })
+    );
   };
   const handleCustButton = () => {
-    setCustLogin(true);
-    setResLogin(false);
+    setCustLogin(!custLogin);
     setVerifyOtp(false);
     console.log(custLogin);
   };
   const handleResButton = () => {
-    setCustLogin(false);
-    setResLogin(true);
+    setCustLogin(!custLogin);
     setVerifyOtp(false);
-    console.log(resLogin);
   };
 
   const handleLoginForm = (event) => {
@@ -87,6 +94,7 @@ export default function Login() {
   const sendToken = (credentialResponse) => {
     console.log(credentialResponse);
   };
+
   return (
     <div className="authdiv">
       <div className="authcontainer">
@@ -116,7 +124,7 @@ export default function Login() {
             </div>
 
             <div
-              className={resLogin ? "authbtn authbtntrue" : "authbtn"}
+              className={!custLogin ? "authbtn authbtntrue" : "authbtn"}
               onClick={handleResButton}
             >
               <span>resturant login</span>
@@ -133,7 +141,7 @@ export default function Login() {
             />
             {verifyOtp && (
               <>
-                <label className="otplabel">OTP Verification</label>
+                <label className="otplabel">Enter your Password</label>
                 <input
                   type="password"
                   className="otpvalue"
@@ -141,7 +149,7 @@ export default function Login() {
                   name="password"
                   onChange={handleLoginForm}
                 />
-                <span className="otplabel">OTP send to above phone number</span>
+                {/* <span className="otplabel">OTP send to above phone number</span> */}
               </>
             )}
             {custLogin && !verifyOtp && (
@@ -154,12 +162,12 @@ export default function Login() {
                 Login
               </button>
             )}
-            {resLogin && !verifyOtp && (
+            {!custLogin && !verifyOtp && (
               <button onClick={handleVerifyOtp} className="loginidbtn">
                 {/* Send One Time Password */}Next
               </button>
             )}
-            {resLogin && verifyOtp && (
+            {!custLogin && verifyOtp && (
               <button onClick={handleResLogin} className="loginidbtn">
                 Login
               </button>
@@ -190,7 +198,7 @@ export default function Login() {
                   </p>
                 </NavLink>
               )}
-              {resLogin && (
+              {!custLogin && (
                 <NavLink
                   to="/partner"
                   style={({ isActive, isPending }) => {
