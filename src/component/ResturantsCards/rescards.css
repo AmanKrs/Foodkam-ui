@@ -54,21 +54,23 @@
 .resname {
   margin: 0px;
   padding: 0px;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 .resdetails {
   display: flex;
   justify-content: space-evenly;
-  margin: 0px;
   padding: 0px;
-  margin-left: 5px;
-  gap: 30px;
+  margin-left: 0px 5px;
+  gap: 15px;
 }
 
 .resloc {
   color: #706a6a;
   margin: 0px;
   padding: 0px;
-  margin-left: 15px;
+  margin-left: 12px;
+  font-size: 0.85rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -94,27 +96,30 @@
     gap: 5px;
   }
   .cardimage {
-    height:100%;
+    height: 100%;
     width: 50%;
   }
   .carddetail {
     height: 100%;
     width: 50%;
     border-radius: 10px;
-    
   }
-  .restyp{
+  .restyp {
     font-size: 1rem;
   }
-  
-.resloc {
 
-  margin-top: 10px;
-  margin-left: 15px;
-}
+  .resloc {
+    margin-top: 8px;
+    margin-left: 12px;
+  }
 }
 @media only screen and (max-width: 420px) {
-   .restyp{
+  .restyp {
     font-size: 3.5vw;
+  }
+  .resloc {
+    margin-top: 8px;
+    margin-left: 12px;
+    font-size: 0.78rem;
   }
 }
